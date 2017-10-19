@@ -1,0 +1,236 @@
+\ProvidesPackage{mathmacros}
+%[06.09.17 v1.0 mathematical macros]
+
+\def\nocolor{}
+%\def\noproofs{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 		math environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%% basic packages
+	\usepackage{amssymb}
+	\usepackage{amsthm}
+	\usepackage{amsfonts}
+	\usepackage{amsmath}
+	\usepackage{bm}
+	%\usepackage[nothm]{thmbox} %Decorate theorem statements
+	\usepackage{mdframed}
+	\usepackage{thmtools} %make the math theorems appeare in tableofcontents %%
+	\usepackage{stmaryrd} %?
+	%\usepackage[most]{tcolorbox}
+	%% amsmath: Theorem,Definition, Bemerkung etc.
+	\newtheoremstyle{myStyle}% style, der die Überschrift nicht fett, sondern kursiv erscheinen lässt
+	  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+	  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+	  {\normalfont}% name of font to use in the body of the theorem
+	  {0pt}% measure of space to indent
+	  {\itshape}% name of head font
+	  {.}% punctuation between head and body
+	  { }% space after theorem head; " " = normal interword space
+	  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+	\theoremstyle{plain}%Text innen wird kursiv
+	\mdfdefinestyle{theoremstyle}{%
+		frametitlerule							= true		,%				
+		linewidth										= 2pt			,%
+		outerlinewidth							=	7				,% 
+		frametitlebackgroundcolor   =	red!50,%
+	}
+
+	\mdfdefinestyle{corstyle}{%
+		frametitlerule							= true		,%				
+		linewidth										= 2pt			,%
+		outerlinewidth							=	7				,% 
+		frametitlebackgroundcolor   =	red!30 	,%
+	}
+
+	\global\mdfdefinestyle{bemstyle}{
+		linecolor										=	black		,%
+		linewidth										= 2pt     ,%
+					}
+	\global\mdfdefinestyle{defstyle}{
+		frametitlerule							= true		,%				
+		linecolor										=	black		,%
+		linewidth										= 2pt			,%
+		outerlinewidth							=	2				,% 
+		frametitlebackgroundcolor	  =	blue!30	,%
+		%backgroundcolor							=	blue!3	,%
+					}
+
+
+	\ifx\nocolor\undefined
+		%Defines something for thmbox
+		\makeatletter
+		\define@key{thmdef}{mdthm}[{}]{%
+		\thmt@trytwice{\def\thmt@theoremdefiner{\mdtheorem[#1]}}{}}
+		\makeatother
+		\declaretheorem[mdthm={style=theoremstyle},numberwithin=chapter,name=Satz]{thm}
+		%
+		%\mdtheorem[style=theoremstyle]{thm}{Satz}[chapter]
+	\else
+		\newtheorem{thm}{Satz}[chapter]
+	\fi
+
+	\ifx\nocolor\undefined
+		\declaretheorem[mdthm={style=corstyle},numberlike=thm,name=Lemma]{lemma}
+		\declaretheorem[mdthm={style=corstyle},numberlike=thm,name=Kollar]{cor}
+	\else
+		\newtheorem{lemma}[thm]{Lemma}
+		\newtheorem{cor}[thm]{Korollar}
+		\newtheorem*{cor*}{Korollar}
+	\fi	
+	\theoremstyle{definition}%Lässt den Text innerhalb nicht mehr kursiv erscheinen
+
+	\ifx\nocolor\undefined
+		\declaretheorem[mdthm={style=defstyle},numberlike=thm,name=Defintion]{definition}
+		\declaretheorem[mdthm={style=corstyle},numberlike=thm,name=Beispiele]{bsp}
+		%\mdtheorem[style=defstyle]{definition}[thm]{Definition}
+		%\mdtheorem[style=corstyle]{bsp}[thm]{Beispiel}
+	\else
+		\newtheorem{definition}[thm]{Definition}
+		\newtheorem{bsp}[thm]{Beispiel}
+	\fi
+	
+	\theoremstyle{myStyle}
+
+	\ifx\nocolor\undefined
+		\declaretheorem[mdthm={style=bemstyle},numberlike=thm,name=Bemerkung]{bem}
+		%\mdtheorem[style=bemstyle]{bem}[thm]{Bemerkung}
+	\else
+		\newtheorem{bem}[thm]{Bemerkung}
+		\newtheorem*{bem*}{Bemerkung}
+	\fi
+
+	\newtheorem*{beh}{Behauptung}
+	\newtheorem*{mbem*}{Eigene Bemerkung}
+	%%% proof mit Namen
+	\newtheorem*{proof*}{Beweisskizze}
+	%%%% Beweisskizzen %%%%%
+	\newenvironment{hinweise}{
+		\footnotesize \begin{proof*}}{\end{proof*}\normalsize
+		}
+	%%%% schöneres QED Symbol %%%%
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+	%%%% für den Erklär- und Motivationstext
+	\newenvironment{motivation}{}{}
+	%% For show no proofs	und Rest
+	\ifx\noproofs\undefined
+	\else
+		\usepackage{environ}
+		\NewEnviron{killcontens}{}
+		%% proofs
+		\let\proof\killcontens
+		\let\endproof\endkillcontents
+		%% hinweise
+		\let\hinweise\killcontens
+		\let\endhinweise\endkillcontens
+		%% motivation		
+		\let\motivation\killcontens
+		\let\endmotivation\endkillcontens
+	\fi
+
+	%% Commands für mdfsetup
+		%\renewenvironment{thm}[1]{\begin{thm}[#1]}{\end{thm}}
+	%% Abbrv. and certain layout for mathenvi.
+	%\renewcommand\thechapter{\Roman{chapter}} %Roman numerics for chapters
+			
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 		Macros 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%Zahlenkörper
+	\newcommand{\C}{\mathbb{C}}
+	\newcommand{\R}{\mathbb{R}}
+	\newcommand{\pR}{\mathbb{R}_{\geq 0}} % R_0^+%
+	\newcommand{\Q}{\mathbb{Q}}
+	\newcommand{\Z}{\mathbb{Z}}
+	\newcommand{\N}{\mathbb{N}}
+	\newcommand{\K}{\mathbb{K}}
+	
+%spaces, special symbols for spaces
+	\newcommand{\hA}{\mathcal{A}}%Script A , hA ~ hässliches A
+	\newcommand{\hL}{\mathcal{L}} \newcommand{\tT}{\mathcal{T}} %topologisches T
+	\newcommand{\F}{\mathcal{F}} %für?
+	\newcommand{\B}{\mathcal{B}} %Raum der beschränkten Funktion
+	\newcommand{\BS}[2][X,Y]{\mathcal{B}(#1#2)} %"Standardraum" der beschränkten Funktion
+	\newcommand{\lL}[2][\Omega,\mu]{\text{L}^{#2}(#1)} %Lebesgue L für Matheumgebgung mit Omega, mu als Standard \lL[Raum,Maß]{Dimension}
+	\newcommand{\Sobolov}{W^{1,2}_0}
+
+%special variables and Abbrev., technial stuff
+	\newcommand{\dX}{\hat{X}}%Dach X
+	\newcommand{\dd}{\hat{d}}%Dach d
+	\newcommand{\olx}{\overline{x}} %OverLine x
+	\newcommand{\oly}{\overline{y}} %Overline y
+	\newcommand{\ov}[1]{\overline{#1}}
+	\newcommand{\xf}{(x_i)_{i\in I}}
+	\newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
+	\newcommand{\inner}[1]{\overset{\circ}{#1}} % das Innere
+	\newcommand{\xt}{x_\eta}%Eigentlich eta glaube ich
+
+%special mathematical operators and quantities
+	\newcommand{\ess}{\textnormal{ess}}
+	\newcommand{\supp}{\textnormal{supp}}
+	\newcommand{\aufspan}{\textnormal{span}}
+	%\newcommand{\seminorm}[1]{||| #1 |||}
+	\newcommand{\seminorm}[1]{\interleave{#1}\interleave}
+	\newcommand{\semi}[1]{\interleave{#1}\interleave}
+	%\newcommand{\norm}[1]{\left \|#1\right\| }
+	\newcommand{\norm}[1]{\left\lvert \left\lvert #1 \right\rvert \right\rvert}
+	\newcommand{\intl}[1]{\int_\Omega #1 d\mu} %"Standard"Lebesgue-Integral über Omega
+	\newcommand{\limes}[1][\infty]{\lim_{n \to #1}}
+	\newcommand{\toinf}[1][n]{\overset{#1\to \infty}{\to}}
+	\newcommand{\inv}[1]{#1^{-1}} %Inverse with ^-1
+	\newcommand{\abs}[1]{\left\lvert #1 \right\rvert }
+	\newcommand{\codim}{\text{codim}\:}
+	\newcommand{\ind}{\text{ind}\:}
+	\newcommand{\set}[1]{\left\{#1\right\}} %Mengen
+	\newcommand{\limesinf}{\underset{n\to\infty}{\lim\inf}}
+	\newcommand{\sqrtp}[2][p]{\sqrt[\leftroot{-3}\uproot{3}#1]{#2}}
+	%%% special for functional analysis
+		\newcommand{\SP}{\left (\cdot,\cdot \right)} %Standardskalarprodukt
+		\newcommand{\Sp}[1]{\left (#1 \right)} % Skalarprodukt mit angepassten Klammern
+		\newcommand{\fop}[1]{\left \langle #1 \right \rangle} %Funktionalauswertung
+		\newcommand{\f}[2]{\langle #1,#2 \rangle} %Konrads fop
+		\newcommand{\wkc}{\rightharpoonup} %weak convergent
+		\newcommand{\wskc}{\overset{*}{\rightharpoonup}} % weak star convergent
+		\newcommand{\supT}[1][a]{
+			\IfEqCase{#1}{
+			{A}{\sup_{x \in \overline{\EK}}} 
+			{R}{\sup_{x \in \partial\EK}}
+			{a}{\sup_{x \in \EK}}
+			}
+		} %sup_EK für die Operatornorm bzw mit Argumet auch Rand oder Abschluss von EK möglich
+		\newcommand{\im}{\textnormal{im }} %??
+
+% Quantors
+	\newcommand{\df}[1][]{% "daraus folgt", also Implikation
+		%\IfEqCase{#1}{
+		%	{a}{\Rightarrow}
+		%	{o}{\overset{\df}{#2}}
+		%} 
+		\overset{{#1}}{\Rightarrow}
+	}
+	\newcommand{\aq}[1][]{\overset{#1}{\Leftrightarrow}} % "äquivalent zu", also Äquivalenz
+	%\newcommand{\lightning}{\text{\Lightning}}
+
+% Special Quantities in space, likes balls
+	\newcommand{\U}[2][1]{U_{#1}(#2)} %Umgebung um #2 mit Abstand #1 \U{r}{a}
+	\newcommand{\EK}{\U{0}} %Umgebung bzw Einheitskugel um 0
+	\newcommand{\BKK}{\B(X,\K)}
+	
+% technical commands for math envoirement or layout
+	\newcommand{\disp}{\displaystyle}
+	\newcommand{\qmarks}[1]{#1}
+	\newcommand{\afs}{"{}}
+	\newcommand{\spcm}[1][-0.8]{\vspace{#1 em}} %technischer Befehl fürs Layout
+	%\newcommand{\glossar}[2]{\begin{description} \item[#1] #2 \end{description}}
+	
+% Commands für tikz:
+	\newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
+	\draw[shift={(#2:#3)}] (#1) arc[start angle=#2, delta angle=90, radius = #3];
+	\fill[shift={(#2+45:#3/2)}] (#1) circle[radius=1.25\pgflinewidth];
+	}
+
+

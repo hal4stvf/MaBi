@@ -1,0 +1,81 @@
+\chapter{1.Overview}
+
+\begin{itemize}
+	\item \enquote{image society} (webpages: 1995 text-based, 2005 image based, 
+		2015 video based \dots)
+		\begin{itemize}[-]
+			\item data transfer rates $\uparrow$, compression rates $\uparrow$ 
+			\item [critical shift: reading $\to$ watching]
+		\end{itemize}
+	\item \enquote{Photoshop}-ing \hfill (remove wrinkles, bumps, \dots)
+	\item Images in medicine (\enquote{medical image proscessing}), x-ray, CT,
+		MRI, ultrasound, \dots (\enquote{modalities}).\\
+		different questions:
+			\begin{enumerate}[1.)]
+			  \item%
+				\todoLayout{align bottom}
+				\begin{minipage}{0.5\linewidth}
+					measurments $\df[?]$ image\\
+				  expl: tomography 	\\
+					$\df$ difficult mathematical problems
+				\end{minipage}
+						\begin{minipage}{0.5\linewidth}
+							\begin{tikzpicture}[scale=0.5]
+								\draw[help lines] (0,0) grid (3,3);
+							\end{tikzpicture}
+						\end{minipage}
+				\item Image enhancements				
+				\begin{itemize}
+
+					\item denoising
+						\begin{itemize}[]
+							\item simple pixels/lines: 
+							\todoWhat[so richtig?]
+								\enquote{sandpaper} interpolation 
+						  \item	global noise: smoothing		
+						\end{itemize}
+
+					\item grayscale
+						\begin{itemize}[]
+							\item histogramm balancing 
+								(spreading)
+						\end{itemize}
+
+					\item distortion
+						\begin{itemize}[]
+							\item makes straight lines (in real world) straight 
+								(in the images)
+						\end{itemize}
+
+					\item edge detection
+						\begin{itemize}[]
+						  \item contour enhancement 
+						\end{itemize}
+
+					\item segmentation
+						\begin{itemize}[]
+						  \item detect and separate parts of the image 
+						\end{itemize}
+					\item registration
+						\begin{itemize}[]
+						  \item \emph{sequence} of images of the same object 
+								$\df$ \todomp{Wort?}, compare
+								\begin{minipage}{0.3\linewidth}
+									\todoSketch
+								\end{minipage}
+								$\nearrow$ object following in a movie
+						\end{itemize}
+				\end{itemize}
+			\end{enumerate}
+\end{itemize}
+
+\textbf{\underline{Our Focus:}}
+\begin{itemize}[-]
+  \item mathematical models/methods/ideas 
+	\item (algorthms)
+	\item ((implementation))
+\end{itemize}
+
+\todoKom{skipped: Very fast intro: Matlab and images }	
+
+

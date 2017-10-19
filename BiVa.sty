@@ -1,0 +1,59 @@
+\ProvidesPackage{FunkAnaSS17style}
+%pdf language settings
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} %provides a better way for westeuropean characters and such 
+\setlength{\parindent}{0cm} %noindent for all paragraphs
+\setlength{\parskip}{0.3em}
+\usepackage[english=british]{csquotes} %For special quoationsmarks
+
+%pdf page settings
+\usepackage[a4paper,top=30mm,bottom=30mm,inner=30mm,outer=30mm]{geometry} 
+\usepackage{scrlayer-scrpage} %Headers and footers
+
+%Headers and Footnotes
+\pagestyle{headings}
+\ihead{Mathematische Bildverabeitung - Vorlesungsabschrift. Stand: \today}
+
+%more features for environments and other stuff
+\usepackage{tikz} %Kein Zeichenprogramm.
+	%% Todo enviroment with package todonote 
+	\usepackage{xkeyval} % Erstmal nur für todonote Package
+	\usepackage{xcolor}
+	\usepackage{calc} % Erstmal nur für todonote Package
+	\usepackage[colorinlistoftodos]{todonotes}
+		%%% Commands and explanation
+			\newcommand{\todoWhat}[1][(???)]{\todo[color=red]{#1}} %r ot Konnte ich nicht lesen, 
+			\newcommand{\todoKom}[1]{\todo[inline]{#1}} %o Kommentare 
+			\newcommand{\todoLayout}[1][Layout!]{\todo[color=yellow,inline]{#1}} %y ellow für schöneres Layout
+			\newcommand{\todoSketch}[1][Skizze]{\todo[color=blue!50,inline]{#1}} %b lue Skizzen, Bilder 
+			\newlength{\lengthfortodomp} %% 
+			\newcommand{\todomp}[2][red]{%
+				\settowidth{\lengthfortodomp}{#2}
+				\begin{minipage}{\lengthfortodomp+0.8em}
+					\todo[inline,color=#1]{#2}	
+				\end{minipage}
+				
+			}
+\usepackage{centernot} %nicer looking not
+\usepackage{marvosym} %some Symbols
+\usepackage{paralist} %Adds more function to listing environments
+\usepackage{xstring} %If then 
+\usepackage{hyperref} %Reference
+\hypersetup{
+	colorlinks = true,
+	linkcolor = {blue},
+	%menucolor = {white},
+	%anchorcolor = {black}
+	%linkbordercolor = {white},
+	%runbordercolor = {red},
+}
+\usepackage{marginnote} %allows to do some nice marinnotes,
+\usepackage{multicol} %for the glossar, to have 2 columns
+	%Glossar
+%	\usepackage[nonumberlist]{glossaries} %for a real glossar with hyperlinks, %Einträge extra in
+%	\loadglsentries{FunkAnaGloss.tex}
+%	\makenoidxglossaries
+	%Modul
+	\usepackage{subfiles}
+%

@@ -1,0 +1,175 @@
+\chapter{2.What is an image?}
+\section{Discrete and continuous images}
+There are (at least) two different points of view:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\leni{0.1\linewidth}
+\def\lenii{0.45\linewidth}
+\def\leniii{0.45\linewidth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{minipage}{\leni}
+~	
+\end{minipage}
+\begin{minipage}{\lenii}
+	$\bullet$ discrete/digital
+
+	\begin{tikz}
+		\draw[help lines] (0,0) grid (6,4);
+	\end{tikz}
+\end{minipage}
+\begin{minipage}{\leniii}
+	$\bullet$ continuous/analogue
+
+	\begin{tikz}
+		\draw[help lines] (0,0) grid (6,4);
+	\end{tikz}
+\end{minipage}
+
+\begin{tabular}{p{\leni} p{\lenii} p{\leniii}}
+	\textbf{object:} & matrix 															  & function \\
+	\textbf{tools:}  & linear algebra (SVD, \dots) 					  & analysis (differentrage, integrate, 
+		\dots) \\
+	\textbf{pros:}   & (finite storage) storage, complexity   & freedom, tools,
+		\todomp{motions?P.4} \par(e.g. edge discontinuity)\\
+	\textbf{cons:}   & limitations: zooming, rotations, \dots & storage (infinite amout of data)\\
+\end{tabular}
+
+~\par
+arguably, one has:
+
+	\begin{itemize}
+	  \item real life $\df$ continuous \enquote{images} (objects) 
+		\item digital camers $\df$ discrete images
+	\end{itemize}	
+
+In general we will say:
+\begin{definition}[(mathematical) image]
+	A (mathematical) \emph{image} is a function	
+		$$ u: \Omega \to F,$$
+	\begin{tabbing}
+	where: \= $\Omega \subset \Z^d$ (discrete) or $\Omega\subset \R^d$ (continuous) 
+						\dots \emph{domain}\\
+				 \> $d = 2$ (typical case 2D), $d=3$ (\enquote{3D image}=body or 
+				 		$\underbrace{\text{2D+time}}_{\text{movie}}$)\\
+				 \> $d = 4$ (3D + time) \par
+	\end{tabbing}
+	
+	\begin{tabbing}
+		$F$ \dots \= \emph{range of colours}\\
+							\> $F= \R$ or $[0,\infty]$ or $[0,1]$  or $\set{0,\dots 255}$, \dots
+								grayscale (light intensity) \\
+							\> $F\subset \R^3$ \dots RGB image (colored)\\
+							\> $F = \set{0,1}$ \dots black/white \hspace{2em}
+							\begin{minipage}[c]{0.4\linewidth}
+								\tikzpictureFourThree[scale=0.5]
+							\end{minipage}
+							\begin{minipage}[c]{0.3\linewidth}
+								3 Layers\\
+								$\df$ colored images:w
+							\end{minipage}
+	\end{tabbing}
+
+\end{definition}
+
+\todoKom{Matlab stuff}
+
+Large parts of the course: analytical approach (i.e. continuous domain $\Omega$)\\
+Since we want to differentirate, \dots the image $u$.
+\begin{itemize}[]
+  \item[Still:] need to assume that also $F$ ist continuous 
+		(not as $\set{0,1}$, $\set{0,1,\dots,255}$ or $\N$)\\
+		since otherwise the only differentiable (actually, the only continuous)
+		functions $u: \Omega \to F$ are \emph{constant} functions 
+		$\aq$ single-colour images
+	\item[Also:] We usually take $F$ one-dimensional $(F \subset \R)$. 
+		Think of it as either
+			\begin{itemize}[-]
+			  \item gray scaled image, or
+				\item treating R,G \& B layer separately
+			\end{itemize}
+\end{itemize}
+
+\section{Switching between discrete and continuous images}
+
+\textbf{\large continuous $\to$ discrete:}\\
+\begin{itemize}
+  \item divide the continuous image in small squared pieces (boxes) 
+	(superimpose grid) 
+
+		\begin{minipage}[b]{0.6\linewidth}
+		\hspace{-1em}$\bullet\;\:$now: represent each box by \emph{one} 
+			value
+			\begin{enumerate}[- str{a}tegy 1:]
+			  \item take function value $u(x_i)$ \\
+					\hspace{4em} for $x_i =$ midpoint of box $B_i$ 
+				\item use mean value
+					$$ \frac{1}{|B_i|}\int_{B_i} u(x) dx$$
+			\end{enumerate}
+		\end{minipage}%
+		\begin{minipage}[t]{0.4\linewidth}
+			\raisebox{1em}{\tikzpictureFIVEONE}
+		\end{minipage}
+\end{itemize}
+$\df $ discrete image
+\begin{enumerate}[str{a}tegy 1:]
+  \item simple (and quick) but problemativ 
+		($u(x_i)$ might represent $u|_{B_i}$ badly; 
+		for $u\in L^p$, single point evaluation not
+		even defined)
+	\item more komplex but also more \enquote{democratic} 
+		(actually closer to the way how CCD Sensors in 
+		digital camers work)
+\end{enumerate}
+often the image value of the box $B_i$ gets also digitized, i.e.
+fitted (by scaling \& rounding) into range $\set{0,1,dots,255}$
+~\\
+\par
+\textbf{\large discrete $\to$ continous }\\
+
+This is of course more tricky \dots
+
+\begin{tabbing}
+$\bullet$ Question:  $\quad$\= \kill
+
+$\bullet$ Again: \> each pixel of the discrete image 
+	 corresponds to a \enquote{box} of the continuous image \\
+	\> (that is still to be constructed) \\
+
+$\bullet$ Usually: \> pixel value $\mapsto$ \= function value at
+	the \emph{midpoint} of the box \\
+$\bullet$ Question: \> How to get the other function values 
+	(in the box)?
+\end{tabbing}
+
+\hspace{1em}
+\begin{minipage}[t][2cm][t]{0.30\textwidth}
+	\tikzpictureSIXONE	 
+\end{minipage}%
+\begin{minipage}[c][2cm][t]{0.55\textwidth}
+	\begin{tabbing}
+ 		\underline{idea 1:} $\;$ \= just take the function value of the 
+			nearest\\ 
+			\> midpoint (\enquote{nearest neighbour interpolation}) 
+	\end{tabbing}
+\end{minipage}
+\vspace{-2.5em}
+\begin{center}
+For each $x\in B_i: u(x) := u(x_j) \;$ 
+where $\displaystyle |x-x_j| = \min_{k} |x-x_k|$
+\end{center}
+\vspace{-.5em}
+%
+\begin{minipage}{0.3\linewidth}
+ \tikzpictureSIXTWO
+\end{minipage}
+%
+\begin{minipage}{0.7\linewidth}
+		$\df \quad$ $u(x) = u(x_i)$ for all $x\in B_i$\\
+		$\df \quad$ each box is uni-color\\
+		$\df \quad$ the continuous image is essentially still discrete
+\end{minipage}
+~\\
+~\\
+{\underline{idea 2}: (bi-) lineare interpolation}
+
+

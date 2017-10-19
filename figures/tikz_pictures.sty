@@ -1,0 +1,25 @@
+\ProvidesPackage{figures/tikz_pictures.sty}
+
+\newcommand{\tikzpictureFourThree}[1][]{%
+	\begin{tikz}[#1]
+	\draw[help lines] (0,0) grid (7,4);
+	\end{tikz}
+}
+
+\newcommand{\tikzpictureFIVEONE}[1][scale=0.5]{%
+  \begin{tikz}[#1]
+   \draw[help lines] (0,0) grid (7,5);
+  \end{tikz}
+}
+
+\newcommand{\tikzpictureSIXONE}[1][scale=0.5]{%
+  \begin{tikz}[#1]
+    \draw[help lines] (0,0) grid (6,4);
+  \end{tikz}
+}
+
+\newcommand{\tikzpictureSIXTWO}[1][scale=0.5]{%
+  \begin{tikz}[#1]
+    \draw[help lines] (0,0) grid (5,4);
+  \end{tikz}
+}
