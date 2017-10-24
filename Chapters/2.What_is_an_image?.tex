@@ -171,12 +171,68 @@ where $\displaystyle |x-x_j| = \min_{k} |x-x_k|$
 ~\\
 ~\\
 {\underline{idea 2}: (bi-) lineare interpolation}
-\todo[inline,color=red]{hier fehlt idea 2 bis P.7}
+%\todo[inline,color=red]{hier fehlt idea 2 bis P.7}
 
+\begin{minipage}{0.3\linewidth}
+	\tikzpictureQSIXTHREE
+\end{minipage}
+\begin{minipage}{0.7\linewidth}
+%
+Let $a,b,c,d \dots$ function values at $4$ surroundring adjacemt midpointes
+($\nearrow$ figure)\\
+$\alpha, \beta, 1-\alpha, 1 - \beta \dots$ distance to dotted lines 
+($\nearrow$ figure, w.l.o.g, bob is $1 \times 1$)
+\end{minipage}
+
+interpolation (linear) on the dotted line between $a$ and $b$:
+
+\begin{minipage}{0.4\linewidth}
+	\tikzpictureQSEVENONE
+
+	\tikzpictureQSEVENTWO
+\end{minipage}
+%
+\begin{minipage}{0.6\linewidth}
+%$\begin{aligned}
+	$e := a + \alpha (b-a) = (1-\alpha) a + ab \quad $
+%\end{aligned}$
+(1D - interpolation, convex combination)\\
+~\\
+similarly: $\qquad$ $f = (a-\alpha) c + ad$ 
+\\
+Then: $\quad$ The same 1D-interpolation between $e$ and $f$
+\end{minipage}
+
+\begin{minipage}{0.3\linewidth}
+\tikzpictureQSEVENTHREE
+\end{minipage}
+\raisebox{0em}{
+\begin{minipage}{0.7\linewidth}
+	$\begin{aligned}
+	\df u(x) &:=  (1-\beta) \cdot e  + \beta \cdot f \\
+		&= (1-\beta) [(1-\alpha) a + ab] + \beta [(1- \alpha) c + \alpha d] \\	
+		&= \underbrace{(1 - \alpha) (1-\beta)} a + \underbrace{\alpha (1 - \beta)} b 
+			+ \underbrace{(1-\alpha) \beta} c + \underbrace{\alpha \beta} d
+	\end{aligned}$
+	\begin{tikzpicture}
+		\draw[help lines,white] (0,0)  grid (9,1);
+		\draw (2.7,1) to [out=270,in=180] (3.8,0.17);
+		\draw (5.2,1) to [out=270,in=90] (5.1,0.4);
+		\draw (7.2,1) to [out=270,in=45] (5.8,0.38);
+		\draw (8.8,1) to [out=220,in=0] (6.2,0.3);
+		\node at (5,0.2) {\small $\in [0,1] \wedge \Sigma =1 $};
+	\end{tikzpicture}
+\end{minipage}
+}
+$\df$ \underline{convex combination} of the function values 
+$a,b,c,d$ at the the surrounding $4$ midpoints 
+(on which points is the nearest instead of taking just $a,b,c$ or $d$ - depending)
+\\
+$\df$ 2D linear interpolation
 \begin{bsp}
 Roate image
 \begin{minipage}{0.2\linewidth}
-	\tikzpictureQSIXTHREE
+ asdaff
 \end{minipage}
 by angle $\phi \neq k\cdot \frac{\pi}{2}$
 \todo[inline,color=red]{hier fehlt alles bis P.8}
