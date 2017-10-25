@@ -24,6 +24,13 @@ stuff. (It is originally from another *project*.)
 -	figures/tikz\_pictures.sty: I put all the tikzpictures there with a
 certain command. (See the files.) 
 
+### Keeping uptodate
+
+Just clone/fork this repository (ask me or google what that means). And pull 
+whenever you want to be uptodate.  
+**Note**: changes you did in this repository might get overwritten
+without warning!
+
 ## The Code didn't change for days, even Weeks?
 
 That means it either past march 2018 or you are on the wrong branch.
@@ -49,7 +56,7 @@ If you don't know what any of that means - just ask me.
 
 ## I found a mistake what should I do?
 
-Please just add the file and make a pull request. If you are not sure if it is 
+Please just edit the file (you can do it in the browser!) and make a pull request. If you are not sure if it is 
 a mistake though you can of course just add an issue.
 
 ## What is github anyway?
