@@ -1,8 +1,53 @@
 \chapter{3.Histogramm and first applicatsion}
 \section{The histogramm}
-
+%
+% Definition histogramm
+%
 \begin{definition}[histogram]
-
+	Let $\Omega \subset \Z^d$, $F\subset \R$ discrete and 
+ 	$u: \Omega \to F$ a discrete discrete image. 
+ 	The function 
+ 		$$ H_u : F \to \N_0 \; (:= \N \cup \set{0})$$
+ 	with 
+	$$ H_u (k) := \# \set{ x\in \Omega: 
+		u(x) = k}, \quad k\in F$$
+	is called \emph{histogramm} of the image $u$.
 \end{definition}
 
+%
+% Bemerkung zum Histrogramm
+%
+$H_u(k)$ counts how often colour $k$ appears in $u$.
+%
+	$$ \sum_{k\in F} H_u (k) = |\Omega| 
+		= \hbox{number of pixels in the whole  image}$$
+or
+%
+	$$ {H_u(k) \over |\Omega|} = 
+		\hbox{relative frequence$%
+			_{\lower0.84em\hbox{\hskip-8.1em (relative Häufigkeit)}}$ 
+				 \hskip-.8em \hbox{of colour $k$ in image $u$}} $$
+
+%
+% Beispiel  
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% minipages mit piks
+\newcommand{\pikA}{%
+	\begin{minipage}{0.14\linewidth}
+		\tikzpictureQNINEONE
+	\end{minipage}%
+}
+\newcommand{\pikB}{%
+	\begin{minipage}{0.35\linewidth}
+		\tikzpictureQNINETWO
+	\end{minipage}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{bsp}
+	$u =$ \pikA has $H_n =$ \pikB  
+\end{bsp}
+
 %Linabilder 20171023_1256_53
+
