@@ -232,14 +232,75 @@ $\df$ \underline{convex combination} of the function values
 $a,b,c,d$ at the the surrounding $4$ midpoints 
 (on which points is the nearest instead of taking just $a,b,c$ or $d$ - depending)
 \\
-$\df$ 2D linear interpolation
+$\df$ 2D linear interpolation, \textit{bi-linear interpolation} (can be 
+interpreted as spline interpolation with bilinear \todomp{basis} splines). 
+
 \begin{bsp}
-Roate image
+
+Rotate image \ \ \ \
+%
 \begin{minipage}{0.2\linewidth}
- asdaff
+	\tikzpictureQEIGHTONE
 \end{minipage}
-by angle $\phi \neq k\cdot \frac{\pi}{2}$
-\todo[inline,color=red]{hier fehlt alles bis P.8}
+%
+by angle \ $\phi \neq k\cdot \frac{\pi}{2}$
+
+~\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Vektoren und Matrizen
+\newcommand{\x}{\begin{pmatrix} x_1 \cr x_2 \end{pmatrix}}
+\newcommand{\y}{\begin{pmatrix} y_1 \cr y_2 \end{pmatrix}}
+\newcommand{\D}{
+	\begin{pmatrix}  
+		\cos \varphi & -\sin \varphi \cr
+		\sin \varphi & \cos \varphi
+	\end{pmatrix}%
+	_{\lower1.1em\hbox{\hskip-8em 2D rotation matrix}}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+  \item continuous image case: no problem \\
+		\begin{minipage}{1\linewidth}
+			\tikzpictureQEIGHTTWO	
+		\end{minipage}
+	$$ \begin{aligned}
+	x 	&= D_\varphi \; y \qquad x = \x ,\; y = \y , \; 
+		 D_\varphi = \D \cr
+	y 	&= \inv{D_\varphi} \; x = D_{-\varphi} \; x \cr
+	\end{aligned} $$
+	%
+	$ \df v(x) := u(y) = u(D_{-\varphi} \; x) \quad
+			\forall x\in \hbox{domain of the rotated image}
+				%$^{\raise0.5em\hbox{\hskip-6.1em domain of the}}$}
+	$ 
+\end{itemize}
+
+\begin{itemize}
+  \item discrete image case: problem ! 
+		\begin{itemize}[]
+		  \item For $x\in$ domain of notated image,
+						in general {$D_{-\varphi} \; x \not\in $
+						domain of original image\footnote{it's not an integer}}\\
+						Way out: $ v(x) := $ \emph{interpolation} between the
+						$u(\cdot)$ of the 4 surrounding pixels of $D_{-\varphi}$ 
+		\end{itemize}
+	\begin{minipage}{1\linewidth}
+		\tikzpictureQEIGHTTHREE	
+	\end{minipage}
+\end{itemize}
+
+Something to think about:
+	\vspace{-1em}
+  \begin{itemize}[]
+    \item% 
+			What happens in the limit (?) if we, starting
+			with an image (discrete or continuous),
+			repeatedly switch between discrete and continuous,
+			non-stop \dots ? \\
+			Does the answer depend on the way of switching ? 
+			(continuous $\to$ discrete: midpoint or average, 
+			discrete $\to$ continuous: nearest neighbour or bilinear?) 
+  \end{itemize}
 
 \end{bsp}
 
