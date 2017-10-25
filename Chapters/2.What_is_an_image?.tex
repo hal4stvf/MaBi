@@ -1,23 +1,25 @@
 \chapter{2.What is an image?}
 \section{Discrete and continuous images}
+
 There are (at least) two different points of view:
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\leni{0.1\linewidth}
-\def\lenii{0.45\linewidth}
-\def\leniii{0.45\linewidth}
+\def\lenA{0.1\linewidth}
+\def\lenB{0.45\linewidth}
+\def\lenC{0.45\linewidth}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{minipage}{\leni}
+\begin{minipage}{\lenA}
 ~	
 \end{minipage}
-\begin{minipage}{\lenii}
+\begin{minipage}{\lenB}
 	$\bullet$ discrete/digital
 
 	\begin{tikz}
 		\draw[help lines] (0,0) grid (6,4);
 	\end{tikz}
 \end{minipage}
-\begin{minipage}{\leniii}
+\begin{minipage}{\lenC}
 	$\bullet$ continuous/analogue
 
 	\begin{tikz}
@@ -25,7 +27,7 @@ There are (at least) two different points of view:
 	\end{tikz}
 \end{minipage}
 
-\begin{tabular}{p{\leni} p{\lenii} p{\leniii}}
+\begin{tabular}{p{\lenA} p{\lenB} p{\lenC}}
 	\textbf{object:} & matrix 															  & function \\
 	\textbf{tools:}  & linear algebra (SVD, \dots) 					  & analysis (differentrage, integrate, 
 		\dots) \\
@@ -36,37 +38,39 @@ There are (at least) two different points of view:
 
 ~\par
 arguably, one has:
-
+%
 	\begin{itemize}
 	  \item real life $\df$ continuous \enquote{images} (objects) 
 		\item digital camers $\df$ discrete images
 	\end{itemize}	
-
+%
 In general we will say:
+%
 \begin{definition}[(mathematical) image]
 	A (mathematical) \emph{image} is a function	
 		$$ u: \Omega \to F,$$
 	\begin{tabbing}
-	where: \= $\Omega \subset \Z^d$ (discrete) or $\Omega\subset \R^d$ (continuous) 
-						\dots \emph{domain}\\
-				 \> $d = 2$ (typical case 2D), $d=3$ (\enquote{3D image}=body or 
-				 		$\underbrace{\text{2D+time}}_{\text{movie}}$)\\
-				 \> $d = 4$ (3D + time) \par
+	where: 
+		\= $\Omega \subset \Z^d$ (discrete) or $\Omega\subset \R^d$ (continuous) 
+			\dots \emph{domain}\\
+		\> $d = 2$ (typical case 2D), $d=3$ (\enquote{3D image} = body or 
+	 		$\underbrace{\text{2D + time}}_{\text{movie}}$)\\
+		\> $d = 4$ (3D + time) \par
 	\end{tabbing}
 	
 	\begin{tabbing}
 		$F$ \dots \= \emph{range of colours}\\
-							\> $F= \R$ or $[0,\infty]$ or $[0,1]$  or $\set{0,\dots 255}$, \dots
-								grayscale (light intensity) \\
-							\> $F\subset \R^3$ \dots RGB image (colored)\\
-							\> $F = \set{0,1}$ \dots black/white \hspace{2em}
-							\begin{minipage}[c]{0.4\linewidth}
-								\tikzpictureFourThree[scale=0.5]
-							\end{minipage}
-							\begin{minipage}[c]{0.3\linewidth}
-								3 Layers\\
-								$\df$ colored images:w
-							\end{minipage}
+			\> $F= \R$ or $[0,\infty]$ or $[0,1]$  or $\set{0,\dots 255}$, \dots
+				grayscale (light intensity) \\
+			\> $F\subset \R^3$ \dots RGB image (colored)\\
+			\> $F = \set{0,1}$ \dots black/white \hspace{2em}
+				\begin{minipage}[c]{0.4\linewidth}
+					\tikzpictureFourThree[scale=0.5]
+				\end{minipage}
+				\begin{minipage}[c]{0.3\linewidth}
+					3 Layers\\
+					$\df$ colored images:w
+				\end{minipage}
 	\end{tabbing}
 
 \end{definition}
@@ -192,16 +196,16 @@ interpolation (linear) on the dotted line between $a$ and $b$:
 	\tikzpictureQSEVENTWO
 \end{minipage}
 %
-\begin{minipage}{0.6\linewidth}
-%$\begin{aligned}
+\raisebox{-2.6em}{\vbox{
 	$e := a + \alpha (b-a) = (1-\alpha) a + ab \quad $
-%\end{aligned}$
-(1D - interpolation, convex combination)\\
-~\\
+	\\
+	\medskip
+	(1D - interpolation, convex combination)
+	\\ \medskip
 similarly: $\qquad$ $f = (a-\alpha) c + ad$ 
 \\
 Then: $\quad$ The same 1D-interpolation between $e$ and $f$
-\end{minipage}
+}}
 
 \begin{minipage}{0.3\linewidth}
 \tikzpictureQSEVENTHREE
