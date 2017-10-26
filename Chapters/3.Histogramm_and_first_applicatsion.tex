@@ -49,5 +49,30 @@ or
 	$u =$ \pikA has $H_n =$ \pikB  
 \end{bsp}
 
+If $u$ ist a continous image, $H_u$ can be understood as
+measure (generalized function)\footnote{density
+of a probability distribution}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Pfeil Befehl
+\newcommand{\underarrow}[2]{%
+	\newlength{\widthA}
+	\newlength{\widthB}
+	\settowidth{\widthA}{#1}
+	\settowidth{\widthB}{#2}
+	%\hbox{\vbox{#1$\uparrow$#2}}%
+	\vbox{1\widthA}{#1\\ \hskip-2em\parbox{\widthB}{$\uparrow$\\#2}}
+	%_{\lower1em\hbox{$\uparrow$ \\ #2}}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\small 
+	Another way to writ this:
+	\[ H_u(k) = \sum_{x\in \Omega} 
+	\delta _{u(x)}(k),\;
+		k \in F \qquad \qquad
+		H_u (k) = \int_{\Omega} \delta_{u(x)}(k) dx, \;
+		k\in F\]
+}
+
 %Linabilder 20171023_1256_53
 
