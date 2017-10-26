@@ -73,6 +73,98 @@ of a probability distribution}.
 		H_u (k) = \int_{\Omega} \delta_{u(x)}(k) dx, \;
 		k\in F\]
 }
+\todoKom{hier fehlt noch das Kronecker underarrow}
+\todoKom{Matlab-Code}
 
 %Linabilder 20171023_1256_53
 
+\section{Application: contrast enhancement}
+
+If the image only uses a small part of the available
+colour/grayscale \enquote{palette} $F$, then its
+contrast can be improved by \enquote{spreading} 
+the histogramm over all of $F$.
+
+Simple idea:
+
+\begin{minipage}{\linewidth}
+	\tikzpictureQTENONE
+\end{minipage}
+
+\begin{minipage}{0.8\linewidth}
+	\tikzpictureQTENTWO
+\end{minipage}
+$\begin{aligned}
+	v 		&= \varphi \circ u \\
+	v(k)  &= \varphi(u(k))
+\end{aligned}$
+
+~\par
+The above simple idea (\enquote{contrast stretching}) 
+corresponds to
+$$ \begin{aligned}
+	\varphi: \; &k_{\min} \mapsto 0 \\
+						  &k_{\max} \mapsto N \\	
+					 		&\text{and linear in between}\\
+ \text{i.e} \qquad \quad \varphi(k)  \quad
+ 							&= \left[\frac {k-k_{\min}} {k_{\max} - k_{\min}}
+								\right]	
+\end{aligned} $$
+
+Where $ [ \quad \cdot \quad ] $ means \dots rounding to the nearest 
+integer (assumuning that $F = \set{0,1,\dots, N}$.
+
+~\par
+A bit more sophisticated:
+$$ \begin{aligned}
+	\varphi: \; (&k_{\min} \mapsto 0) \\
+						  &k_{\max} \mapsto N \\	
+					 		&\text{and \textbf{non} linear in between}\\
+\end{aligned} $$
+
+such that colour ranges that occur more frequently in $u$
+can occupy a larger range of colours in $u$. 
+($\df$ visibility $\uparrow$)
+
+\newlength{\fittinglinewidth}
+\newlength{\phrasewidth}
+\settowidth{\phrasewidth}{Example histogramm}
+Example histogramm: 
+\begin{minipage}{\linewidth-\phrasewidth}
+	\tikzpictureQELVENONE  
+\end{minipage}
+
+spread out according to frequency of occurence:
+
+\begin{minipage}{\linewidth}
+	\tikzpictureQELVENTWO 
+\end{minipage}
+
+$\df$ \enquote{density} is equalized over $F = \set{0,\dots,N}$
+
+~\par
+{\footnotesize
+	Ideal would be: 
+
+	\begin{minipage}{\linewidth}
+	 	\tikzpictureQELVENTHREE 
+	\end{minipage}
+}
+
+~\par
+\todoLayout[Layout S.12 u]
+Note: The new colours (i.e the location of the bars 
+in the histogramm of $u$) only depend on the
+frequencies / \emph{height} of the bars in $H_u$
+but not on the colours/location of the bars in $H_u$
+
+~\par
+Finally: The formula
+	$$ \varphi(k) = \left[ \frac {N} {|\Omega|} 
+	\sum_{l=0}^{k} H_u (l) \right]$$
+
+This process is called \enquote{histogramm equalization}
+
+\todoKom{Exercise ?!}
+
+\section{Another application: conversion to b/w}	
