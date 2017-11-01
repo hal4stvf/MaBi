@@ -1,7 +1,7 @@
 \chapter{2.What is an image?}
 \section{Discrete and continuous images}
 
-There are (at least) two different points of view:
+There are (at least) two different points of view:\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\lenA{0.1\linewidth}
@@ -9,23 +9,15 @@ There are (at least) two different points of view:
 \def\lenC{0.45\linewidth}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{minipage}{\lenA}
-~	
+\begin{minipage}[t]{\lenB}
+	\ContinousImage
 \end{minipage}
-\begin{minipage}{\lenB}
-	$\bullet$ discrete/digital
+\hfill\vrule\hfill
+\begin{minipage}[t]{\lenC}
+	\DiscreteImage
+\end{minipage}
 
-	\begin{tikz}
-		\draw[help lines] (0,0) grid (6,4);
-	\end{tikz}
-\end{minipage}
-\begin{minipage}{\lenC}
-	$\bullet$ continuous/analogue
-
-	\begin{tikz}
-		\draw[help lines] (0,0) grid (6,4);
-	\end{tikz}
-\end{minipage}
+\ \\
 
 \begin{tabular}{p{\lenA} p{\lenB} p{\lenC}}
 	\textbf{object:} & matrix 															  & function \\
