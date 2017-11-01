@@ -168,3 +168,56 @@ This process is called \enquote{histogramm equalization}
 \todoKom{Exercise ?!}
 
 \section{Another application: conversion to b/w}	
+
+\begin{itemize}[]
+  \item [Task:] convert grayscale image to black white\\
+	- interesting for object detection/\emph{segmentation} \dots !
+	\item Idea: Find a threshold $t\in T$ s.t. the histogramm splits
+		into two \enquote{characteristic} parts
+\end{itemize}
+
+\begin{minipage}{\linewidth}
+ 	\tikzpictureQTWELVEONE 
+\end{minipage}
+
+For $t\in F$ put 
+
+$$\begin{aligned}
+	\text{black} &	:= \set{k\in F: k \le t} \\
+	\text{white} & 	:= \set{k\in F: k > t} \\
+\end{aligned}$$
+and 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newlength{\vspacecorrection}
+%\settohight{\vspacecorrection}{black}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$$ \begin{aligned}
+		\overset{\sim}{u} & :=		
+			\begin{cases}
+				0, & u(x) \in \text{black} \\
+				1, & u(x) \in \text{white}
+			\end{cases}
+			& \quad \overset{\sim}{F} = \set{0,1} 
+\end{aligned} $$
+
+~\par
+
+How to find the threshold $t$: 
+\begin{enumerate}[1.)]
+  \item% 
+	\begin{minipage}[t]{0.6\linewidth}
+		%\vspace{2em}
+	  Shape based methods\\
+		If the histogramm is \enquote{biomodal}\\
+		Put $ \displaystyle t:= \frac {k_{\max_1} + k_{\max_2}} {2}$\\
+		or $\displaystyle t:= k_{\min}$
+	\end{minipage} 
+	\raisebox{-3.2em}{
+	\begin{minipage}[b]{0.4\linewidth}
+	 	\tikzpictureQTHIRTEENONE
+	\end{minipage}}
+\end{enumerate}
+
+
