@@ -210,6 +210,56 @@
   \end{center}
 }
 
+\newcommand{\HistogrammExSp}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (6,0) node[right] {$F$};
+        \draw[->] (0,0) -- (0,3);
+        \tlbar{0.75}{0}{1}{20}{4}
+        \tlbar{1.5}{0}{1.25}{40}{6}
+        \tvnmark{2.25}{0}{...}
+        \tlbar{3}{0}{1.75}{99}{10}
+        \tlbar{3.4}{-0.3}{2.75}{100}{20}
+        \tlbar{3.8}{0}{2.25}{101}{15}
+        \tlbar{4.2}{-0.3}{1.125}{102}{5}
+        \tvnmark{4.8}{0}{...}
+        \tvmark{5.5}{0}{255}
+        \draw[->, thick, text width = 2cm] (6.5,1.5) -- node[above] {\footnotesize Linear Transformation $\phi$} (7.5,1.5);
+        \draw[->] (8,0) node[yshift=-4, xshift = -4] {0} -- (13,0) node[right] {$F$};
+        \draw[->] (8,0) -- (8,3);
+        \tlbar{8.25}{0}{1}{3}{4}
+        \tvnmark{8.75}{0}{...}
+        \tlbar{9.25}{0}{1.75}{64}{6}
+        \tvnmark{9.75}{0}{...}
+        \tlbar{10.25}{0}{1.75}{243}{10}
+        \tlbar{10.75}{-0.3}{2.75}{246}{20}
+        \tlbar{11.25}{0}{2.25}{249}{15}
+        \tlbar{11.75}{-0.3}{1.125}{252}{5}
+        \tvmark{12.4}{0}{255}
+        \draw[] (1.5,2.25) node[] {$\abs{\Omega}=60$};
+        \draw (10.5,-0.8) node[below] {\footnotesize $k_{min} =19, \ k_{max}=103$};
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\HistogrammExSpFr}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (8,0) node[right] {$F$};
+        \draw[->] (0,0) -- (0,3);
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (0,-0.2) -- node[below] {\small $\frac{4}{60} N$} (1,-0.2);
+        \tlbar{1}{0}{1}{}{4}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (1,-0.2) -- node[below] {\small $\frac{6}{60} N$} (2.5,-0.2);
+        \tlbar{2.5}{0}{1.25}{}{6}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (2.5,-0.2) -- node[below] {\small $\frac{10}{60} N$} (4.5,-0.2);
+        \tlbar{4.5}{0}{1.75}{}{10}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (4.5,-0.2) -- node[below] {\small $\frac{20}{60} N$} (7,-0.2);
+        \tlbar{7}{0}{2.5}{}{20}
+        \tvnmark{7.5}{0}{...}
+    \end{tikzpicture}
+  \end{center}
+}
+
 \newcommand{\tikzpictureFourThree}[1][]{%
 	\begin{tikz}[#1]
 	\draw[help lines] (0,0) grid (7,4);
