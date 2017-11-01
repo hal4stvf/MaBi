@@ -141,6 +141,30 @@
   \end{center}
 }
 
+\newcommand{\HistogrammEx}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) node {$\Omega=$};
+        \draw[fill = black] (1.05,0.95) rectangle (1.95,0.05);
+        \draw[fill = black] (2.05,0.95) rectangle (2.95,0.05);
+        \draw[fill = black!30] (1.05,-0.05) rectangle (1.95,-0.95);
+        \draw[fill = white] (2.05,-0.05) rectangle (2.95,-0.95);
+        \draw (1,1) grid (3,-1);
+        \draw[->] (3.25,0) -- (3.5,0);
+        \draw[->] (4,-1.25) -- (8,-1.25) node[right] {$F$};
+        \draw[->] (4,-1.25) -- (4,1.5);
+        \tvmark{5}{-1.25}{black}
+        \tvmark{6}{-1.25}{grey}
+        \tvmark{7}{-1.25}{white}
+        \thmark{4}{-0.25}{1}
+        \thmark{4}{0.75}{2}
+        \draw (5,0.75) node {\textbullet};
+        \draw (6,-0.25) node {\textbullet};
+        \draw (7,-0.25) node {\textbullet};
+    \end{tikzpicture}
+  \end{center}
+}
+
 \newcommand{\DiscreteImage}[0]{
   \begin{center}
     \underline{\textbf{Continous / Analogue}}
