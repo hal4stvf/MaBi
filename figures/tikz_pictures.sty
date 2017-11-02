@@ -14,26 +14,12 @@
 \newcommand{\thmark}[3] {
   \draw[] (#1+0.1,#2) -- (#1-0.1,#2) node[left] {\small #3};
 }
-
 \newcommand{\tvnmark}[3] {
   \draw[] (#1,#2-0.1) node[below] {\small #3};
 }
-
 \newcommand{\tlbar}[5]{
   \draw[thick] (#1,#2-0.1) node[below] {\small #4} -- (#1,#3) node[above] {#5};
   \draw[thick] (#1-0.1,#3) -- (#1+0.1,#3);
-}
-\newcommand{\ContinousImage}[0]{
-  \begin{center}
-      \underline{\textbf{Discrete / Digital}}    
-    \begin{tikzpicture}
-        \fill[black!30!white] (1,2) rectangle (1.5,2.5);
-        \draw[step=0.5,thin,draw=black] (0,0) grid (4,4);
-        \draw[thick] (0,0) rectangle (4,4);
-    \end{tikzpicture}
-    \\
-    \captionof{figure}{Discrete Image}
-  \end{center}
 }
 
 \newcommand{\DiscreteImage}[0]{
@@ -54,6 +40,225 @@
 \end{center}
 }
 
+\newcommand{\ContinousImage}[0]{
+  \begin{center}
+      \underline{\textbf{Discrete / Digital}}    
+    \begin{tikzpicture}
+        \fill[black!30!white] (1,2) rectangle (1.5,2.5);
+        \draw[step=0.5,thin,draw=black] (0,0) grid (4,4);
+        \draw[thick] (0,0) rectangle (4,4);
+    \end{tikzpicture}
+    \\
+    \captionof{figure}{Discrete Image}
+  \end{center}
+}
+
+\newcommand{\ContoDis}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw (-0.5,2) node {$\Omega=$};
+        \draw[step=0.5,thin,draw=black,dotted] (0.01,0.01) grid (3.99,3.99);
+        \draw[thick] (0,0) rectangle (4,4);
+        \draw[thick] (2,2) rectangle (2.5,2.5);
+        \draw[] (2.1,2.1) -- (3,-0.3) node[anchor = south west, yshift = -7] {\small Box $B_i$};
+    \end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\DistoCont}[0]{
+  \begin{center}
+    \begin{tikzpicture}[scale = 0.8]
+        \draw (-1,2) node {$\Omega=$};
+        \draw[->] (-0.25,-0.25) -- (-0.25,4.5);
+        \draw[->] (-0.25,-0.25) -- (4.5,-0.25);
+        \draw (-0.35,4) -- (-0.15,4);
+        \draw (-0.35,0) -- (-0.15,0);
+        \draw (0,-0.35) -- (0,-0.15);
+        \draw (4,-0.35) -- (4,-0.15);                            
+        \draw[step=0.5,thin,draw=black] (0,0) grid (4,4);
+        \foreach \x in {0.25,0.75,..., 3.75}{
+            \foreach \y in {0.25,0.75,..., 3.75}{
+                \draw (\x,\y) node {\tiny \textbullet};
+        }
+        }
+        \draw[thick] (0,0) rectangle (4,4);
+        \draw[thick] (2,2) rectangle (2.5,2.5);
+        \draw[] (2.1,2.1) -- (3,-0.7) node[anchor = south west, yshift = -7] {\small Box $B_i$};
+    \end{tikzpicture}
+\end{center}
+}
+
+\newcommand{\NearestNeighbour}[0]{
+  \begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \draw[step = 1] (0.75,0.75) grid (3.25,3.25);
+        \foreach \x in {1.5,2.5}{
+            \foreach \y in {1.5,2.5}{
+                \draw (\x,\y) node {\tiny \textbullet};
+        }
+        }
+        \draw (1.5,2.5) node[anchor=north west] {a};
+        \draw (2.5,2.5) node[anchor=south west] {b};
+        \draw (1.5,1.5) node[anchor=north west] {c};
+        \draw (2.5,1.5) node[anchor=north west] {d};
+
+        \draw (1.5,1.5) rectangle (2.5,2.5);
+        \draw (1.45,2.15) -- (1.55,2.15);
+        \draw (1.8,2.45) -- (1.8,2.55);
+        \draw[decorate,decoration={brace,amplitude=2pt}] (1.5,2.6) -- node[anchor=south] {\small $\alpha$} (1.8,2.6);
+        \draw[decorate,decoration={brace,amplitude=2pt}] (1.4,2.15) --node[anchor=east] {\small $\beta$} (1.4,2.5);
+        \draw (1.8,2.15) node {\tiny \textbullet} node[anchor=west, xshift=-2] {\small p};
+        \draw[decorate,decoration={brace,amplitude=4pt}] (1.5,2.9) -- node[anchor= south west,yshift = 2] {\small 1} (2.5,2.9);
+        \draw[decorate,decoration={brace,amplitude=4pt}] (1.1,1.5) -- node[anchor= south east, xshift=-2] {\small 1} (1.1,2.5);
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\RotateCont}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw (0,0.1) -- node[anchor=center] {\tiny \textbullet} node[anchor=north] {\tiny $0$} (3,0.1);
+        \draw  (4,0.1) node  {$\overset{\text{\footnotesize turn by $\alpha$}}{\Rightarrow}$};
+        \draw (6.5,0.1) -- ++(30:1.5);
+        \draw (6.5,0.1) node[anchor=center] {\tiny \textbullet} node[anchor=north] {\tiny $0$} -- ++(210:1.5);
+        \draw[dotted] (5,0.1) -- (8,0.1);
+        \draw (7,0.1) arc[radius=0.5,start angle=0,end angle=30]  node[anchor = north west] {\tiny $\alpha$};
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\RotateDis}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \foreach \x in {0,1,2,3}{
+                \draw (0.5*\x,0) node {\tiny \textbullet};
+        }
+        \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (-0.1,-0.1) -- node[anchor= north] {\small $\subset \Z^d$} (1.6,-0.1);
+        \draw[->] (1.75,0) -- (2,0);
+        \draw[step=0.5, shift={(2.25,0.25)}] (0,0) grid (2,-0.5);
+        \foreach \x in {0,1,2,3}{
+            \draw[shift={(2.5,0)}] (0.5*\x,0) node {\tiny \textbullet};
+        }
+        \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (2.15,-0.4) -- node[anchor= north] {\small $\subset \R^d$} (4.35,-0.4);
+        \draw[->] (4.5,0) -- node[above] {\small $D_\varphi$} (4.75,0);
+        \draw[step=0.5, shift={(5,0.25)},rotate around = {45:(1,-0.25)}] (0,0) grid (2,-0.5);
+        \foreach \x in {0,1,2,3}{
+            \draw[shift={(5.25,0)},rotate around = {45:(0.75,0)}] (0.5*\x,0) node {\tiny \textbullet};
+        }
+        \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (4.9,-1) -- node[anchor= north] {\small $\subset \R^d$} (7.1,-1);
+        \draw[->] (7.25,0) -- node[above] {\small rastern} (7.5,0);
+        \draw[->] (4.5,0) -- node[above] {\small $D_\varphi$} (4.75,0);
+        \draw[step=0.5, shift={(8,0.25)},rotate around = {45:(1,-0.25)}] (0,0) grid (2,-0.5);
+        \foreach \x in {0,1,2,3}{
+            \draw[shift={(8.25,0)},rotate around = {45:(0.75,0)}] (0.5*\x,0) node {\tiny \textbullet};
+        }
+        \draw[dotted,step=0.5] (7.9,1) grid (10.1,-1);
+        \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (7.9,-1.2) -- node[anchor= north] {\small $\subset \Z^d$} (10.1,-1.2);
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\HistogrammEx}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) node {$u=$};
+        \draw[fill = black] (1.05,0.95) rectangle (1.95,0.05);
+        \draw[fill = black] (2.05,0.95) rectangle (2.95,0.05);
+        \draw[fill = black!30] (1.05,-0.05) rectangle (1.95,-0.95);
+        \draw[fill = white] (2.05,-0.05) rectangle (2.95,-0.95);
+        \draw (1,1) grid (3,-1);
+        \draw[->] (3.25,0) -- (3.5,0);
+        \draw[->] (4,-1.25) -- (8,-1.25) node[right] {$F$};
+        \draw[->] (4,-1.25) -- (4,1.5);
+        \tvmark{5}{-1.25}{black}
+        \tvmark{6}{-1.25}{grey}
+        \tvmark{7}{-1.25}{white}
+        \thmark{4}{-0.25}{1}
+        \thmark{4}{0.75}{2}
+        \draw (5,0.75) node {\textbullet};
+        \draw (6,-0.25) node {\textbullet};
+        \draw (7,-0.25) node {\textbullet};
+    \end{tikzpicture}
+  \end{center}
+}
+\newcommand{\ContrastEn}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+       \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (4.2,0) node[right] {$F$};
+       \draw[->] (0,0) -- (0,2);
+       \draw[thick] plot [smooth, tension = 0.8] coordinates {(1.5,0) (1.75,0.75) (2,0.5) (2.25,1.25) (2.5,0)};
+       \tvmark{1.5}{0}{$k_{min}$}
+       \tvmark{2.5}{0}{$k_{max}$}
+       \draw[->,thick] (4.25,1) -- (4.75,1);
+       \draw[->] (5,0) node[yshift=-4, xshift = -4] {0} -- (9.2,0) node[right] {$F$};
+       \draw[->] (5,0) -- (5,2);
+       \draw[thick,shift={(5,0)}] plot [smooth, tension = 0.8] coordinates {(0,0) (1,0.75) (2,0.5) (3,1.25) (4,0)};
+       \tvmark{9}{0}{$N$}
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\ContrastEnSch}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+      \draw[->] (0,0) node[below] {$\Omega$} to[bend left] node[above] {\small originales Bild} (1.8,0);
+      \draw (2,0) node[below] {$F$};
+      \draw[->] (2.2,0) to[bend left] node[above] {\small Zauberei $T$} (4,0) node[below] {$F$};
+      \draw[->] (0,-0.5) to[bend right] node[below] {\small Bild mit besserem Kontrast} (4,-0.5);
+      \draw[text width = 2.3cm] (5,0) node[right] {\small $v = T \circ u$\\ $v(k)=T(u(k)) $};
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\HistogrammExSp}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (6,0) node[right] {$F$};
+        \draw[->] (0,0) -- (0,3);
+        \tlbar{0.75}{0}{1}{20}{4}
+        \tlbar{1.5}{0}{1.25}{40}{6}
+        \tvnmark{2.25}{0}{...}
+        \tlbar{3}{0}{1.75}{99}{10}
+        \tlbar{3.4}{-0.3}{2.75}{100}{20}
+        \tlbar{3.8}{0}{2.25}{101}{15}
+        \tlbar{4.2}{-0.3}{1.125}{102}{5}
+        \tvnmark{4.8}{0}{...}
+        \tvmark{5.5}{0}{255}
+        \draw[->, thick, text width = 2cm] (6.5,1.5) -- node[above] {\footnotesize Linear Transformation $\phi$} (7.5,1.5);
+        \draw[->] (8,0) node[yshift=-4, xshift = -4] {0} -- (13,0) node[right] {$F$};
+        \draw[->] (8,0) -- (8,3);
+        \tlbar{8.25}{0}{1}{3}{4}
+        \tvnmark{8.75}{0}{...}
+        \tlbar{9.25}{0}{1.75}{64}{6}
+        \tvnmark{9.75}{0}{...}
+        \tlbar{10.25}{0}{1.75}{243}{10}
+        \tlbar{10.75}{-0.3}{2.75}{246}{20}
+        \tlbar{11.25}{0}{2.25}{249}{15}
+        \tlbar{11.75}{-0.3}{1.125}{252}{5}
+        \tvmark{12.4}{0}{255}
+        \draw[] (1.5,2.25) node[] {$\abs{\Omega}=60$};
+        \draw (10.5,-0.8) node[below] {\footnotesize $k_{min} =19, \ k_{max}=103$};
+    \end{tikzpicture}
+  \end{center}
+}
+
+\newcommand{\HistogrammExSpFr}[0]{
+  \begin{center}
+    \begin{tikzpicture}
+        \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (8,0) node[right] {$F$};
+        \draw[->] (0,0) -- (0,3);
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (0,-0.2) -- node[below] {\small $\frac{4}{60} N$} (1,-0.2);
+        \tlbar{1}{0}{1}{}{4}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (1,-0.2) -- node[below] {\small $\frac{6}{60} N$} (2.5,-0.2);
+        \tlbar{2.5}{0}{1.25}{}{6}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (2.5,-0.2) -- node[below] {\small $\frac{10}{60} N$} (4.5,-0.2);
+        \tlbar{4.5}{0}{1.75}{}{10}
+        \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (4.5,-0.2) -- node[below] {\small $\frac{20}{60} N$} (7,-0.2);
+        \tlbar{7}{0}{2.5}{}{20}
+        \tvnmark{7.5}{0}{...}
+    \end{tikzpicture}
+  \end{center}
+}
 
 \newcommand{\tikzpictureFourThree}[1][]{%
 	\begin{tikz}[#1]

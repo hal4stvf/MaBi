@@ -28,28 +28,11 @@ or
 			_{\lower0.84em\hbox{\hskip-8.1em (relative Häufigkeit)}}$ 
 				 \hskip-.8em \hbox{of colour $k$ in image $u$}} $$
 
-%
-% Beispiel  
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% minipages mit piks
-\newcommand{\pikA}{%
-	\begin{minipage}{0.14\linewidth}
-		\tikzpictureQNINEONE
-	\end{minipage}%
-}
-\newcommand{\pikB}{%
-	\begin{minipage}{0.35\linewidth}
-		\tikzpictureQNINETWO
-	\end{minipage}%
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{bsp}
-	$u =$ \pikA has $H_n =$ \pikB  
+\begin{bsp}\ 
+	\HistogrammEx
 \end{bsp}
 
-If $u$ ist a continous image, $H_u$ can be understood as
+If $u$ ist a continous image, $H_u$ can be understood as a
 measure (generalized function)\footnote{density
 of a probability distribution}. 
 
@@ -66,7 +49,7 @@ of a probability distribution}.
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\small 
-	Another way to writ this:
+	Another way to write this:
 	\[ H_u(k) = \sum_{x\in \Omega} 
 	\delta _{u(x)}(k),\;
 		k \in F \qquad \qquad
@@ -87,17 +70,8 @@ the histogramm over all of $F$.
 
 Simple idea:
 
-\begin{minipage}{\linewidth}
-	\tikzpictureQTENONE
-\end{minipage}
-
-\begin{minipage}{0.8\linewidth}
-	\tikzpictureQTENTWO
-\end{minipage}
-$\begin{aligned}
-	v 		&= \varphi \circ u \\
-	v(k)  &= \varphi(u(k))
-\end{aligned}$
+\ContrastEn
+\ContrastEnSch 5
 
 ~\par
 The above simple idea (\enquote{contrast stretching}) 
@@ -114,6 +88,10 @@ $$ \begin{aligned}
 Where $ [ \quad \cdot \quad ] $ means \dots rounding to the nearest 
 integer (assumuning that $F = \set{0,1,\dots, N}$.
 
+Example histogram:
+
+\HistogrammExSp
+
 ~\par
 A bit more sophisticated:
 $$ \begin{aligned}
@@ -129,16 +107,9 @@ can occupy a larger range of colours in $u$.
 \newlength{\fittinglinewidth}
 \newlength{\phrasewidth}
 \settowidth{\phrasewidth}{Example histogramm}
-Example histogramm: 
-\begin{minipage}{\linewidth-\phrasewidth}
-	\tikzpictureQELVENONE  
-\end{minipage}
+Example histogramm spread out according to frequency of occurence:
 
-spread out according to frequency of occurence:
-
-\begin{minipage}{\linewidth}
-	\tikzpictureQELVENTWO 
-\end{minipage}
+\HistogrammExSpFr
 
 $\df$ \enquote{density} is equalized over $F = \set{0,\dots,N}$
 

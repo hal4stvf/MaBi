@@ -89,32 +89,31 @@ Since we want to differentirate, \dots the image $u$.
 
 \textbf{\large continuous $\to$ discrete:}\\
 \begin{itemize}
-  \item divide the continuous image in small squared pieces (boxes) 
-	(superimpose grid) 
-
-		\begin{minipage}[b]{0.6\linewidth}
-		\hspace{-1em}$\bullet\;\:$now: represent each box by \emph{one} 
-			value
-			\begin{enumerate}[- str{a}tegy 1:]
-			  \item take function value $u(x_i)$ \\
-					\hspace{4em} for $x_i =$ midpoint of box $B_i$ 
-				\item use mean value
-					$$ \frac{1}{|B_i|}\int_{B_i} u(x) dx$$
-			\end{enumerate}
-		\end{minipage}%
-		\begin{minipage}[t]{0.4\linewidth}
-			\raisebox{1em}{\tikzpictureFIVEONE}
-		\end{minipage}
+	\begin{minipage}[b]{0.6\linewidth}
+		\item divide the continuous image in small squared pieces (boxes) 
+		(superimpose grid) 
+		\item now: represent each box by \emph{one} 
+		value
+		\begin{enumerate}[- str{a}tegy 1:]
+		\item take function value $u(x_i)$ \\
+				\hspace{4em} for $x_i =$ midpoint of box $B_i$ 
+			\item use mean value
+				$$ \frac{1}{|B_i|}\int_{B_i} u(x) dx$$
+		\end{enumerate}
+	\end{minipage}%
+	\begin{minipage}[t]{0.35\linewidth}
+		\DistoCont
+	\end{minipage}
 \end{itemize}
 $\df $ discrete image
 \begin{enumerate}[str{a}tegy 1:]
-  \item simple (and quick) but problemativ 
+  \item simple (and quick) but problematic
 		($u(x_i)$ might represent $u|_{B_i}$ badly; 
 		for $u\in L^p$, single point evaluation not
 		even defined)
-	\item more komplex but also more \enquote{democratic} 
+	\item more complex but also more \enquote{democratic} 
 		(actually closer to the way how CCD Sensors in 
-		digital camers work)
+		digital cameras work)
 \end{enumerate}
 often the image value of the box $B_i$ gets also digitized, i.e.
 fitted (by scaling \& rounding) into range $\set{0,1,dots,255}$
@@ -166,7 +165,7 @@ where $\displaystyle |x-x_j| = \min_{k} |x-x_k|$
 \end{minipage}
 ~\\
 ~\\
-{\underline{idea 2}: (bi-) lineare interpolation}
+{\underline{idea 2}: (bi-) linear interpolation}
 %\todo[inline,color=red]{hier fehlt idea 2 bis P.7}
 
 \begin{minipage}{0.3\linewidth}
@@ -174,7 +173,7 @@ where $\displaystyle |x-x_j| = \min_{k} |x-x_k|$
 \end{minipage}
 \begin{minipage}{0.7\linewidth}
 %
-Let $a,b,c,d \dots$ function values at $4$ surroundring adjacemt midpointes
+Let $a,b,c,d \dots$ function values at $4$ surrounding adjacent midpoints
 ($\nearrow$ figure)\\
 $\alpha, \beta, 1-\alpha, 1 - \beta \dots$ distance to dotted lines 
 ($\nearrow$ figure, w.l.o.g, bob is $1 \times 1$)
@@ -182,31 +181,22 @@ $\alpha, \beta, 1-\alpha, 1 - \beta \dots$ distance to dotted lines
 
 interpolation (linear) on the dotted line between $a$ and $b$:
 
-\begin{minipage}{0.4\linewidth}
-	\tikzpictureQSEVENONE
-
-	\tikzpictureQSEVENTWO
+\begin{minipage}{0.35\linewidth}
+	\NearestNeighbour
 \end{minipage}
-%
-\raisebox{-2.6em}{\vbox{
-	$e := a + \alpha (b-a) = (1-\alpha) a + ab \quad $
+\hfill
+\begin{minipage}{0.6\linewidth}
+	$e := a + \alpha (b-a) = (1-\alpha) a + \alpha b$
 	\\
 	\medskip
 	(1D - interpolation, convex combination)
 	\\ \medskip
-similarly: $\qquad$ $f = (a-\alpha) c + ad$ 
-\\
-Then: $\quad$ The same 1D-interpolation between $e$ and $f$
-}}
-
-\begin{minipage}{0.3\linewidth}
-\tikzpictureQSEVENTHREE
-\end{minipage}
-\raisebox{0em}{
-\begin{minipage}{0.7\linewidth}
+	Similarly: $\qquad$ $f = (1-\alpha) c + \alpha d$ 
+	\\
+	Then: The same 1D-interpolation between $e$ and $f$\\
 	$\begin{aligned}
-	\df u(x) &:=  (1-\beta) \cdot e  + \beta \cdot f \\
-		&= (1-\beta) [(1-\alpha) a + ab] + \beta [(1- \alpha) c + \alpha d] \\	
+	\df u(x) :&=  (1-\beta) \cdot e  + \beta \cdot f \\
+		&= (1-\beta) [(1-\alpha) a + \alpha b] + \beta [(1- \alpha) c + \alpha d] \\	
 		&= \underbrace{(1 - \alpha) (1-\beta)} a + \underbrace{\alpha (1 - \beta)} b 
 			+ \underbrace{(1-\alpha) \beta} c + \underbrace{\alpha \beta} d
 	\end{aligned}$
@@ -216,13 +206,14 @@ Then: $\quad$ The same 1D-interpolation between $e$ and $f$
 		\draw (5.2,1) to [out=270,in=90] (5.1,0.4);
 		\draw (7.2,1) to [out=270,in=45] (5.8,0.38);
 		\draw (8.8,1) to [out=220,in=0] (6.2,0.3);
-		\node at (5,0.2) {\small $\in [0,1] \wedge \Sigma =1 $};
+		\node at (5,0.2) {\small $\in [0,1] \wedge \sum =1 $};
 	\end{tikzpicture}
 \end{minipage}
-}
+
+
 $\df$ \underline{convex combination} of the function values 
 $a,b,c,d$ at the the surrounding $4$ midpoints 
-(on which points is the nearest instead of taking just $a,b,c$ or $d$ - depending)
+(on which points is the nearest, instead of taking just $a,b,c$ or $d$ - depending)
 \\
 $\df$ 2D linear interpolation, \textit{bi-linear interpolation} (can be 
 interpreted as spline interpolation with bilinear \todomp{basis} splines). 
@@ -253,7 +244,7 @@ by angle \ $\phi \neq k\cdot \frac{\pi}{2}$
 \begin{itemize}
   \item continuous image case: no problem \\
 		\begin{minipage}{1\linewidth}
-			\tikzpictureQEIGHTTWO	
+			\RotateCont	
 		\end{minipage}
 	$$ \begin{aligned}
 	x 	&= D_\varphi \; y \qquad x = \x ,\; y = \y , \; 
@@ -277,7 +268,7 @@ by angle \ $\phi \neq k\cdot \frac{\pi}{2}$
 						$u(\cdot)$ of the 4 surrounding pixels of $D_{-\varphi}$ 
 		\end{itemize}
 	\begin{minipage}{1\linewidth}
-		\tikzpictureQEIGHTTHREE	
+		\RotateDis
 	\end{minipage}
 \end{itemize}
 
