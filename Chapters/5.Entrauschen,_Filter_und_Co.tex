@@ -2,15 +2,15 @@
 %This, again, is just a translation of my lecture note
 %TODO move the tikz graphics into the dedicated directory
     \subsection{Noise}
-        \mim{Noise}: Unwanted disturbances in an image
+        \mim{Noise} = Unwanted disturbances in an image. Mostly becaue of 
         \begin{enumerate}[-]
             \item point wise
             \item random
             \item independent
-            \item additive (for multiplicative noise use $log$)
         \end{enumerate}
+				We consider \emph{noise} to be an additive disturbances (for multiplicative noise use $log$).
 
-        Notation:
+        \emph{Notation:}
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) rectangle (2,2);
@@ -27,11 +27,15 @@
             \end{tikzpicture}
         \end{center}
 
-        The quality of the denoised image $u$ compared to the original image $f_0$ is described by norms.
-        \[\norm{f-f_0}, \text{noise}\]
-        \[\norm{u-f_0}, \text{\mim{absolute error}}\]
-        \[\frac{\norm{u-f_o}}{\norm{f-f_0}}, \text{\mim{relative error} compared to the noise}\]
-        \[\frac{\norm{u-f_o}}{\norm{f_0}}, \text{relative error compared to the signal}\]
+        The quality of the denoised image $u$ compared to the original image $f_0$ is described by norms:
+        \[
+				\begin{aligned}
+								\norm{f-f_0} & \dots \text{noise}\\
+				        \norm{u-f_0} & \dots \text{\mim{absolute error}}\\
+				        \frac{\norm{u-f_o}}{\norm{f-f_0}} & \dots \text{\mim{relative error} compared to the noise}\\
+				        \frac{\norm{u-f_o}}{\norm{f_0}} & \dots \text{relative error compared to the signal}
+				\end{aligned}
+				\]
         
         Typically the chosen norm is:
         \[\norm{f} = \norm{f}_2 = \sqrt{\int_{\Omega} \abs{f(x)}^2 dx}\]
