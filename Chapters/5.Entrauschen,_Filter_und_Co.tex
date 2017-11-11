@@ -227,3 +227,179 @@
             \item $f \boxast g = \tilde f * g \overset{\framebox{\small 2}}{=} g * \tilde f = \tilde{\tilde g} * \tilde f \overset{\framebox{\small 3}}{=} \widetilde{(\tilde g * f)} = \widetilde{g \boxast f} \neq g \boxast f$, not commutative!
             \item $\tilde f \boxast \tilde g = \tilde{\tilde f} * \tilde g \overset{\framebox{\small 3}}{=} \widetilde{(\tilde f * g)} = \widetilde{f \boxast g}$, Compatibility with reflection
         \end{enumerate}
+
+        $\boxast$ und $*$ definiert man auf: $\ell^1(\Z^d):=\{f=(f_i)_{i \in \Z^d} : \underbrace{\sum_{i \in \Z^d}\abs{f_i}}_{:=\norm{f}_1} < \infty\}$
+        
+            Man kann zeigen (Übung): $f,g \in \ell^1 \Rightarrow f * g \in \ell^1$ und $\norm{f * g}_1 \leq \norm{f}_1 \C \norm{g}_1$.
+            Wobei oft die Gleichheit gilt.
+            
+            Alles gilt auch in der Kontinuierlichen Version:
+            \[L^1(\R^d) := \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{:=\norm{f}_1} < \infty\}\]
+            \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
+        
+            Beispiel für den kontinueirlichen Fall:
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[dotted] (0,1) node[left] {$\frac{1}{2a}$} -- (8,1);
+                    \draw (0,0) node[left] {$g:$} -- (2.5,0) -- (2.5,1) -- (5.5,1) -- (5.5,0) -- (8,0);
+                    \draw (2.5,0) node[below] {\small $-a$};
+                    \draw[dotted] (4,0) node[below] {\small $0$} -- (4,1.5);
+                    \draw (5.5,0) node[below] {\small $-a$};
+                \end{tikzpicture}
+            \end{center}
+            Hierbei gilt $\displaystyle \int_{\R} g(x) dx = 1$
+        
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[thick, name path = P2,shift = {(0,-2.5)}] node [left] {$f:$}plot [smooth, tension = 0.45] coordinates {(0,0) (1.2,1.5) (2.1,0.3) (3,2) (4.3,1) (5.3,1.6) (6.6,0.5) (7.5,1) (8,0)};
+                \end{tikzpicture}
+            \end{center}
+        
+            $g \boxast f = $ \mim{gleitendes Mittel}.\\
+        
+                \begin{tikzpicture}
+                    \draw[dotted] (0,1) node[left] {$\frac{1}{2a}$} -- (8,1);
+                    \draw (0,0) node[left] {$g \boxast g = \tilde g * g = g * g=$} -- (1,0) -- (4,1) -- (7,0) -- (8,0);
+                    \draw (1,0) node[below] {\small $-2a$};
+                    \draw[dotted] (4,0) node[below] {\small $0$} -- (4,1.5);
+                    \draw (7,0) node[below] {\small $-2a$};
+                \end{tikzpicture}
+        
+            Weitere Eigenschaften der Faltung:\\
+            Für alle $f,g \in L^1$ or $\ell ^1$
+            \begin{equation*}
+                \left.\begin{aligned}
+                    (g_1 + g_2) * f = (g_1 * f) + (g_2 * g)\\
+                    (\alpha g) * f = \alpha (g * f)
+                \end{aligned}\right\}=\text{Linearität}
+            \end{equation*}
+            Somit ist:
+            \[g \mapsto f * g\]
+            ein linearer Operator.
+        
+            Formt $\ell^1$ bzw. $L^1$ eine Algebra mit neutralem Element $\delta$?
+        
+            $\ell^1$?:
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw (0,-0.5) node[left] {\large $\delta$:};
+                    \draw[thick] (0.5,0) grid (6.5,-1);
+                    \draw (0.5,-0.5) node {\LARGE ...};
+                    \draw (6.5,-0.5) node {\LARGE ...};
+                    \draw (1.5,-0.5) node {\LARGE 0};
+                    \draw (2.5,-0.5) node {\LARGE 0};
+                    \draw (3.5,-0.5) node {\LARGE 1};
+                    \draw (4.5,-0.5) node {\LARGE 0};
+                    \draw (5.5,-0.5) node {\LARGE 0};
+                    \draw[->] (3.5,-1.4) node[below] {Pos $0$} -- (3.5,-1.1);
+                \end{tikzpicture}
+            \end{center}
+            Ja!
+        
+            $L^1$?:
+            Für ein solches Element muss gelten:\\
+            $\forall f \in L^1 : d * f = f$\\
+            $\forall x \in \R :\displaystyle \int_{\R^d} \underbrace{\delta(x-y)}_{=0 \forall x \neq y} f(y) dy = f(x)$
+        
+            Diese Funktion wird \mim{Dirac-Impuls} gennant ist aber kein Element von $L^1$.
+        
+            \underline{Nun zu Masken in 2D:}
+        
+            \begin{equation*}
+                u = m \boxast f \text{ mit } m= \raisebox{-0.665cm}{\begin{tikzpicture}
+                    \draw[step = 0.5] (0,0) grid (0.5,1.5);
+                    \draw[step = 0.5] (-0.5,1) grid (1,0.5);
+                    \draw (0.25,1.25) node {$\alpha$};
+                    \draw (0.25,0.75) node {$\gamma$};
+                    \draw (0.25,0.25) node {$\epsilon$};
+                    \draw (-0.25,0.75) node {$\beta$};
+                    \draw (0.75,0.75) node {$\delta$};
+                \end{tikzpicture}}
+            \end{equation*}
+            wobei $\alpha + \beta +\gamma +\delta + \epsilon = 1$\\
+            Kurzschreibweise: $u_{ij}:=u(x)$ wobei $x = \begin{pmatrix}i\\j\end{pmatrix} \in \Z^2$, analog für $f_{ij}$.
+        
+            \[\Rightarrow u_{ij} = \alpha f_{i-1,j} + \beta f_{i,j-i} + \gamma f_{ij} + \delta f_{i,j+1} + \epsilon f_{i+1,j}\]
+        
+            \begin{equation*}
+                u = m \boxast f = \tilde m * f \text{ mit } \tilde m = \raisebox{-0.665cm}{\begin{tikzpicture}
+                    \draw[step = 0.5] (0,0) grid (0.5,1.5);
+                    \draw[step = 0.5] (-0.5,1) grid (1,0.5);
+                    \draw (0.25,1.25) node {$\epsilon$};
+                    \draw (0.25,0.75) node {$\gamma$};
+                    \draw (0.25,0.25) node {$\alpha$};
+                    \draw (-0.25,0.75) node {$\delta$};
+                    \draw (0.75,0.75) node {$\beta$};
+                \end{tikzpicture}}
+            \end{equation*}
+        
+            \underline{Symmetrischer Fall:}
+        
+            \begin{equation*}
+            \tilde m = \raisebox{-0.665cm}{\begin{tikzpicture}
+                    \draw[step = 0.5] (0,0) grid (0.5,1.5);
+                    \draw[step = 0.5] (-0.5,1) grid (1,0.5);
+                    \draw (0.25,1.25) node {$\alpha$};
+                    \draw (0.25,0.75) node {$\gamma$};
+                    \draw (0.25,0.25) node {$\alpha$};
+                    \draw (-0.25,0.75) node {$\alpha$};
+                    \draw (0.75,0.75) node {$\alpha$};
+                \end{tikzpicture}} \text{ mit } \gamma = 1 - 4 \alpha
+            \end{equation*}
+        
+            \begin{equation}
+                u_{ij} = (1 - 4 \alpha)f_{ij} + \alpha(f_{i-1,j} + f_{i,j-1} + f_{i,j+1} + f_{i+1,j})
+            \end{equation}
+        
+            \begin{equation*}
+                    \text{Erinnerung: } \raisebox{-1.2cm}{\begin{tikzpicture}[scale=0.9]
+                        \draw (0,0) rectangle (2,2);
+                        \draw (1,0) node[below] {\small Sauberes Bild};
+                        \draw (1,1) node[] {\LARGE $f_0$};
+                        \draw[->] (2.1,1) -- node[above] {\small $+$ Rauschen} (3.9,1);
+                        \draw (4,0) rectangle (6,2);
+                        \draw (5,0) node[below] {\small Gestörtes Bild};
+                        \draw (5,1) node[] {\LARGE $f$};
+                        \draw[->] (6.1,1) -- node[above] {\small Entrauschen} (7.9,1);
+                        \draw (8,0) rectangle (10,2);                
+                        \draw (9,0) node[below] {\small Resultat};
+                        \draw (9,1) node[] {\LARGE $u$};
+                    \end{tikzpicture}}
+            \end{equation*}
+        
+            Annahme: $f_{ij} = f_{ij} +r_{ij}$ mit $r_{ij} \sim N(0,\sigma^2)$ iid.
+        
+            z.z.: $Var(u_{ij}) \leq Var(f_{ij})$\\
+            
+            \begin{equation*}
+                Var(f_{ij}) = E(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}_{r_{ij}})^2 = \sigma^2
+            \end{equation*}
+        
+            \begin{align*}
+                Var(u_{ij}) &= E(u_{ij} - E u_{ij})^2 = E((1 - 4 \alpha) (\underbrace{f_{ij} - f^0_{ij}}_{r_{ij}}) + \alpha(\underbrace{(f_{i-1,j} - f^0_{i-1,j})}_{r_{i-1,j}} + ... + \underbrace{(f_{i+1,j} - f^0_{i+1,j})}_{r_{i+1,j}}))^2\\
+                &= E((1 - 4 \alpha)^2 r_{ij}^2 + \alpha^2(r_{i-1,j}^2 + r_{i,j-1}^2 +r_{i,j+1}^2 + r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha r_{ij} r_{i-1,j}...)\\%TODO fix this mess
+                &= (1 - 4 \alpha)^2 \underbrace{E r_{i,j}^2}_{\sigma^2} + \alpha^2(E r_{i-1,j}^2 + ... + E r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha \underbrace{E(r_{ij}r_{i-1,j})}_{\underbrace{E r_{ij} E r_{i-1,j}}_{0}} + \underbrace{...}_{0})\\
+                &=(1 - 4 \alpha)^2 \sigma^2 + \alpha^2 4 \sigma^2 = (1 - 8 \alpha + 16 \alpha ^2 + 4 \alpha^2) \sigma^2
+            \end{align*}
+        
+            Da $0 \leq \alpha$ und $ 0 \leq 1 - 4 \alpha \Rightarrow 0 \leq \alpha \leq \frac{1}{4}$:
+        
+            \begin{equation*}
+                (1 - 8 \alpha + 16 \alpha ^2 + 4 \alpha^2) \sigma^2 = \underbrace{1 + \underbrace{20 \alpha}_{\geq 0} (\underbrace{\alpha - \frac{2}{5}}_{< 0})}_{\leq 1}
+            \end{equation*}
+        
+            $\Rightarrow Var(u_{ij}) \leq Var(f_{ij})$ für $\alpha \in [0,\frac{1}{4}]$\\
+            
+            Dabei gilt: $Var(u_{ij}) \overset{\alpha}{\to} d \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
+        
+            \begin{equation*}
+                \Rightarrow \text{bester Filter} : \ \raisebox{-0.9cm}{\begin{tikzpicture}[scale = 1.3]
+                        \draw[step = 0.5] (0,0) grid (0.5,1.5);
+                        \draw[step = 0.5] (-0.5,1) grid (1,0.5);
+                        \draw (0.25,1.25) node {$\frac{1}{5}$};
+                        \draw (0.25,0.75) node {$\frac{1}{5}$};
+                        \draw (0.25,0.25) node {$\frac{1}{5}$};
+                        \draw (-0.25,0.75) node {$\frac{1}{5}$};
+                        \draw (0.75,0.75) node {$\frac{1}{5}$};
+                    \end{tikzpicture}}
+                \end{equation*}
