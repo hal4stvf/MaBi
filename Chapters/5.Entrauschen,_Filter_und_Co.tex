@@ -711,28 +711,48 @@ Es ist zu bemerken, dass $g$ eine Art Tensor Struktur besitzt, was in etwa bedeu
 
 \section{Filterbreite und Glättung}
 
-klar: $\frac{1}{25}$%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVEONE
-\end{minipage}
-glättet mehr als $\frac{1}{9}$%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVETWO
-\end{minipage}
+\begin{center}
+	\begin{tikzpicture}
+		\foreach \i in {0,...,4}
+			\foreach \j in {0,...,4}
+				\draw (0.5*\i + 0.25,0.5*\j + 0.25) node[] {\small 1};
+		\draw[step = 0.5] (0,0) grid (2.5,2.5);
+		\draw (0,1.25) node[left] {klar ist: $\frac{1}{25}$};
+		\draw (3,1.25) node[right] {'glättet mehr als': $\frac{1}{9}$};
+		\draw[step = 0.5, shift = {(6.5,0.5)}] (0,0) grid (1.5,1.5);
+		\foreach \i in {0,...,2}
+			\foreach \j in {0,...,2}
+				\draw (0.5*\i + 6.75,0.5*\j + 0.75) node[] {\small 1};
+	\end{tikzpicture}
+\end{center}
 
 Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
 Setze 
 	$$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
 
-Bsp (in $d =1 $0):%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVETHREE  
-\end{minipage}
-$\df$
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVEFOUR
-\end{minipage}
+Bsp (in $d =1 $):
+\begin{center}
+	\begin{tikzpicture}
+		\draw[->] (-2.2,0) -- (2.2,0) node[right] {\small x};
+		\draw[->] (0,-0.1) -- (0,2.2) node[above] {\small y};
+		\draw (-2,0.1) -- (-2,-0.1) node[below] {\small $-1$};
+		\draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+		\draw (0.1,2) -- (-0.1,2) node[left] {\small $1$};
+		\draw[thick] (-2,0) -- (0,2) -- (2,0);
+		\draw (1.2,1.2) node[rotate = -45] {\small $y=m(x)$};
+		\draw[->] (3.8,0) -- (12.2,0) node[right] {\small x};
+		\draw[->] (8,-0.1) -- (8,1.2) node[above] {\small y};
+		\draw (4,0.1) -- (4,-0.1) node[below] {\small $-1$};
+		\draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+		\draw (8.1,1) -- (7.9,1) node[left, xshift = -9, yshift = 4] {\small $\frac{1}{2}$};
+		\draw[thick] (4,0) -- (8,1) --(12,0);
+		\draw (10,0.8) node[rotate = -12.5] {\small $y=m(x)$};
+		\draw[->,double] (2,1.5) -- node[above] {\small $s=2$} (4,1.5);
+	\end{tikzpicture}
+\end{center}
 
-Bsp: G \dots Gauß-Kern, Skalierung mit Fehler $s > 0$
-$$ \df G_s(x) = \frac{1}{s^d} G( \frac {x} {s} ) = ...$$
-\todoKom{siehe S. 45}
+Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}}$\\
+Skalierung mit Fehler $s > 0$
+$$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
+
+Skalierung $s \hat = $ Standardabweichung $\sigma$
