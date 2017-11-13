@@ -390,7 +390,7 @@
 			z.z.: $Var(u_{ij}) \leq Var(f_{ij})$\\
 			
 			\begin{equation*}
-				Var(f_{ij}) = E(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}
+				Var(f_{ij}) = E(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}%
 					_{r_{ij}})^2 = \sigma^2
 			\end{equation*}
 		
@@ -429,3 +429,72 @@
 	Es braucht etwas Layout }
 
 \section{Frequenzfilter}
+	\emph{Ansatz}: Rauschen $\approx$ hochfrequente Anteile des Bildes/Signals\\
+	\hspace{0.5\linewidth} $\df$ gezieltes entfernen
+
+	\begin{minipage}{1\linewidth}
+	 	\tikzpictureQTHIRTYSEVENONE
+	\end{minipage}
+
+Wichtiges Instrument: Fouriertransformation (FT)
+
+$$ \mathcal{F} : f \mapsto \hat{f} \text{ mit } \hat{f} (z) = 
+	\frac{1}{(2\pi^{\frac{d}{2}}}  \int_{\R^d}dx$$
+
+\todoKom{hier fehlt der rest aus einer Vorlesung}
+
+\todoKom{siehe auch p. 41}
+
+\begin{minipage}{1\linewidth}
+% f -> \hat{f} -> u ... 
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+ % \tikzpictureQFOURTYONETHREE 
+\end{minipage}
+
+Genauer: 
+$$ \mathcal{F} u = \hat{v} = $$
+$$ \begin{aligned}
+	g(x) &= \frac{1}{2\pi)^{\frac{d}{2}}} (\inv{\mathcal{F}} \chi_{[-r,r]})(x)\\
+			 &= \frac{1}{2\pi)^{\frac{d}{2}}}\frac{1}{2\pi)^{\frac{d}{2}}}
+			 		\int_{\R^d} \chi_{[-r,r]}(z) e^{i \fop{z,x} dz} \\
+			 & \overset{1d}{=} \frac{1}{2\pi} \int_{-\infty}^{\infty} \chi_{[-r,r]} 
+			 	 e^{izx}dz \\
+			 &= \frac{1}{2\pi} \int_{-r}^{r} e^{izx} dz 
+			 	= \frac{1}{2\pi} \; \frac{e^{izx}}{ix} \bigg| ^r _ {z =-r} \\
+			&= \frac{1}{2\pi ix } (e^{irx} - e^{-irx}) = \frac{1}{\pi x} \sin(rx)
+\end{aligned}$$	
+
+$$ \hat{g} (0) = (\mathcal{F} g)(0) = \frac{1}{2}$$
+
+\todoKom{allerhand noch im Skript und ein Tafelfoto}
+
+\section{Filterbreite und Glättung}
+
+klar: $\frac{1}{25}$%
+\begin{minipage}{0.4\linewidth}
+%\tikzpictureQFOURYTFIVEONE
+\end{minipage}
+glättet mehr als $\frac{1}{9}$%
+\begin{minipage}{0.4\linewidth}
+%\tikzpictureQFOURYTFIVETWO
+\end{minipage}
+
+Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
+Setze 
+	$$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
+
+Bsp (in $d =1 $0):%
+\begin{minipage}{0.4\linewidth}
+%\tikzpictureQFOURYTFIVETHREE  
+\end{minipage}
+$\df$
+\begin{minipage}{0.4\linewidth}
+%\tikzpictureQFOURYTFIVEFOUR
+\end{minipage}
+
+Bsp: G \dots Gauß-Kern, Skalierung mit Fehler $s > 0$
+$$ \df G_s(x) = \frac{1}{s^d} G( \frac {x} {s} ) = ...$$
+\todoKom{siehe S. 45}
+Mo 13 Nov 2017 12:57:12 CET
