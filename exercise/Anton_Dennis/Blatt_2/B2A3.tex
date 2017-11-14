@@ -1,17 +1,24 @@
 \documentclass[
  %ngerman,convert={density=300,size=1080x800,outext=.png}]{standalone}
- ngerman,preview]{standalone}
-%\usepackage{mathmacros}
+ ngerman]{report}
+\usepackage{mathmacros}
 \usepackage{exercise}
 
 \begin{document}
-%\textbf{Blatt 2. Aufgabe 3}
- alsdfjalsjdfklasjfjlasj
- $\displaystyle E = m c ^2 $
- $$\displaystyle E = m c ^2 $$
- $\displaystyle E = m c ^2 $ $\displaystyle E = m c ^2 $ $\displaystyle E = m c ^2 $
- \\
- asdfas
-	\\
- asdfasdfa
+\section{Blatt 2. Aufgabe 3}
+Der $L^p$ isometrisch-isomorph zum $\ell^p$, d.h., dass 
+\emph{wesentliche} Struktur und Eigenschaften äquivalent zwischen beiden 
+Räumen erhalten bleibt ist. Damit sollten sich die Beweise für
+die folgenden Eigenschaften für $\ell^1$ automatisch auch auf
+$L^1$ auswirken.
+
+\begin{enumerate}[1)]
+	\item $(f \ast g) \ast h = f \ast (g \ast h)$ 
+	\item $f\ast g = g \ast f$. 
+	\item $f \in \ell^(\Z), g \in \ell^q(\Z)$. Dann ist $f\ast g \in \ell^r (Z)$ 
+		mit $ \frac {1} {p} + \frac {1} {q} = 1 + \frac {1} {r}$, $p,q,r \geq 1$
+		und 
+		$$ \norm{f\ast g}_{L^r} \leq \norm{f}_{L^p} \cdot  \norm{g}_{L^q}$$
+	\item $\overset{\sim}{f} \ast \overset{\sim}{g} = \overset{\sim}{f\ast g}$
+\end{enumerate}
 \end{document}
