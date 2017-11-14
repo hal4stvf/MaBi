@@ -432,9 +432,12 @@
 	\emph{Ansatz}: Rauschen $\approx$ hochfrequente Anteile des Bildes/Signals\\
 	\hspace{0.5\linewidth} $\df$ gezieltes entfernen
 
-	\begin{minipage}{1\linewidth}
-	 	\tikzpictureQTHIRTYSEVENONE
-	\end{minipage}
+	\newcommand{\skprod}[2]{
+		\left \langle #1,#2 \right \rangle
+	}
+	\newcommand{\srmatrix}[1] {
+	\left( \begin{smallmatrix} #1 \end{smallmatrix} \right)
+	}
 
 Wichtiges Instrument: Fouriertransformation (FT)
 
@@ -445,20 +448,248 @@ $$ \mathcal{F} : f \mapsto \hat{f} \text{ mit } \hat{f} (z) =
 
 \todoKom{siehe auch p. 41}
 
-\begin{minipage}{1\linewidth}
-% f -> \hat{f} -> u ... 
-\end{minipage}
+\begin{equation*}
+	\begin{tikzpicture}[scale = 0.9]
+		\draw (0,0) rectangle (2,2);
+		\draw (1,0) node[below] {\small Sauberes Bild};
+		\draw (1,1) node[] {\LARGE $f_0$};
+		\draw[->] (2.1,1) -- node[above] {$+r$} (2.9,1);
+		\draw (3,0) rectangle (5,2);
+		\draw (4,0) node[below] {\small Gestörtes Bild};
+		\draw (4,1) node[] {\LARGE $f$};
+		\draw[->] (5.1,1) -- node[above] {$\mathcal F$} (5.9,1);
+		\draw (6,-0.5) rectangle (9,2.5);
+		\draw (6,1) -- (9,1);
+		\draw[thick, name path = P2]plot [smooth, tension = 0.8] coordinates {(6,1) (6.1,1.3) (6.4,1.1) (6.6,1.6) (7,1.1) (7.3,2.0) (7.5,1.1) (7.7,1.2) (7.8,1.9) (8.1,1.5) (8.5,1.9) (9,1)};
+		\draw[->] (9.1,1) -- node[above] {\small Abschneiden} (10.9,1);
+		\draw[->] (14.1,1) -- node[above] {$\mathcal F^{-1}$} (14.9,1);
+		\draw[decorate,decoration={brace,amplitude=2pt,mirror}] (6,0.6) -- node[below] {\scriptsize \begin{tabular}{c} niedrige \\ Frequenzen \end{tabular}} (7.5,0.6);
+		\draw[decorate,decoration={brace,amplitude=2pt,mirror}] (7.5,0.6) -- node[below] {\scriptsize \begin{tabular}{c} hohe \\ Frequenzen \end{tabular}} (9,0.6);
+		\draw[thick, name path = P2,shift = {(5,0)}]plot [smooth, tension = 0.8] coordinates {(6,1) (6.1,1.3) (6.4,1.1) (6.6,1.6) (7,1.1) (7.3,2.0) (7.5,1.1) (7.7,1.2) (7.8,1.9) (8.1,1.5) (8.5,1.9) (9,1)};
+		\draw[color = white,fill] (12.7,1) rectangle (14,2.5);
+		\draw (11,1) -- (14,1);                
+		\draw (11,-0.5) rectangle (14,2.5);
+		\draw (15,0) rectangle (17,2);
+		\draw[thick] (7.7,0.8) -- (7.7,2.3);
+		\draw[thick] (12.7,0.8) -- (12.7,2.3);                
+		\draw (16,1) node[] {\LARGE $u$};
+		\draw[decorate,decoration={brace,amplitude=2pt,mirror}] (5.5,-1) -- node[below] {im Frequenzbereich} (14.5,-1);
+		\draw[decorate,decoration={brace,amplitude=2pt,mirror}] (3,-1.5) -- node[below] {\mim{Frequenzraumfilter} (Tiefpass)} (17,-1.5);
+	\end{tikzpicture}
+\end{equation*}
 
-\begin{minipage}{\linewidth}
- % \tikzpictureQFOURTYONETHREE 
-\end{minipage}
+Wobei  $z \in \R^d, f \in L^1(\R^d)$.
+
+    Falls auch $\hat f \in L^1(\R^d)$ ist ,dann lässt sich $f$ wie folgt mittels der inversen Fouriertransformation aus $\hat f$ rekonstruieren:
+
+    \[\mathcal F^{-1} : \hat f \mapsto f\]
+    \begin{equation}
+        \boxed{\hat f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(x) e^{i \skprod{z}{x}} dx}
+    \end{equation}
+    Wobei $x \in \R^d$.\\
+
+    Man hat also $\mathcal F^{-1} \mathcal F f$, d.h.
+
+    \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \left(\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) e^{-i \skprod{z}{y}} dy\right) e^{i \skprod{z}{x}} dz\]
+
+    Sei nun $e_z(x) := e^{i \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
+$z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
+    Also $e_z(x) = e^{i\skprod{\srmatrix{z_1\\z_2}}{\srmatrix{x_1\\x_2}}} = e^{i (z_1 x_1 +z_2 x_2)}$\\
+    Beispiele in $2D$:\\
+    (Hier stellen die Linien, Punkte mit konstantem wert dar)
+
+    \begin{minipage}[t]{0.49\linewidth}
+        \begin{center}
+            $z = \srmatrix{1 \\ 0}, \  e_z(x)=e^{ix_1}$:\\
+            \begin{tikzpicture}
+                \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+                \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+                \foreach \i in {-0.7, 0.3, 1.3, 2.3, 3.3}{
+                    \draw[thick] (\i,-0.6) -- (\i,4.1);
+                }
+            \end{tikzpicture}
+
+            $z = \srmatrix{0 \\ 1}, \  e_z(x)=e^{ix_2}$:\\
+            \begin{tikzpicture}
+                \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+                \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+                \foreach \i in {-0.7, 0.3, 1.3, 2.3, 3.3}{
+                    \draw[thick] (-0.6,\i) -- (4.1,\i);
+                }
+            \end{tikzpicture}
+
+            $z = \srmatrix{1 \\ 1}, \  e_z(x)=e^{i(x_1 + x_2}$:\\
+            \begin{tikzpicture}
+                \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+                \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+                \foreach \i in {-2.6, -1.6, -0.6, 0.4, 1.4}{
+                    \draw[thick, rotate = -45,shift={(0,\i)}] (-2,2) -- (2,2);
+                }
+            \end{tikzpicture}
+        \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.49\linewidth}
+        $z = \srmatrix{2 \\ 0}, \ e_z(x)=e^{i2x_1}$:\\
+        \begin{tikzpicture}
+            \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+            \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+            \foreach \i in {-0.7, -0.2, 0.3, 0.8, 1.3, 1.8, 2.3, 2.8, 3.3}{
+                \draw[thick] (\i,-0.6) -- (\i,4.1);
+            }
+        \end{tikzpicture}
+
+        $z = \srmatrix{0 \\ 2}, \  e_z(x)=e^{i2x_2}$:\\
+        \begin{tikzpicture}
+            \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+            \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+            \foreach \i in {-0.7, -0.2, 0.3, 0.8, 1.3, 1.8, 2.3, 2.8, 3.3}{
+                \draw[thick] (-0.6,\i) -- (4.1,\i);
+            }
+        \end{tikzpicture}
+
+        $z = \srmatrix{-2 \\ 1}, \  e_z(x)=e^{i(-2x_1 + x_2)}$:\\
+        \begin{tikzpicture}
+            \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
+            \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
+            \foreach \i in {-2.8, -1.8, -0.8, 0.2, 1.2}{
+                \draw[thick, rotate = 112.5,shift={(0.85*\i,0.85*\i)}] (-1,1) -- (3,-3);
+            }
+        \end{tikzpicture}
+    \end{minipage}
+    
+    $\displaystyle f \in L^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 dx < \infty\}$ ist
+    \begin{enumerate}[-]
+        \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2 := \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
+        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g} := \int_{\R^d} f \bar g dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
+        \item ein vollständiger Raum, also \mim{Banachraum}
+    \end{enumerate}
+    Ein vollständiger normierter Banachraum mit Skalarproduk heißt \mim{Hilbertraum}.
+
+    $\mathcal F$ kann auch als Abbildung auf $L^2(\R^d)$ betrachtet werden. Dann gilt:\\
+    \[\hat f = \mathcal F f \in L^2(\R^d)\]
+    und
+    \begin{equation}
+        \norm{\hat f}_2 = \norm{f}_2
+    \end{equation}
+    und sogar
+    \begin{equation}
+        \skprod{\hat f}{\hat g}_2 = \skprod{f}{g}_2
+    \end{equation}
+    für alle $f,g \in L^2(\R^d)$.
+
+    Weitere Eigenschaften der Fouriertransformation:
+
+    \begin{enumerate}[-]
+        \item $f \in L^1(\R^d) \Rightarrow \hat f$ stetig und $\underset{\abs{z} \to \infty}{lim} \hat f(z) = 0$
+        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine lineare Abbildung
+        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine beschränkte/stetige Abbildung
+        \item Verschiebung $\overset{\mathcal F}{\to}$ Modulation, d.h.
+        \begin{equation*}
+            g(x) = f(x+a) \Rightarrow \hat g(z) = e^{i \skprod{a}{z}} \hat f(z)
+        \end{equation*}
+        \item Modulation $\overset{\mathcal F}{\to}$ Verschiebung, d.h.
+        \begin{equation*}
+            g(x) = e^{i \skprod{x}{a}} f(x) \Rightarrow \hat g(z)= \hat f(z-a)
+        \end{equation*}
+        \item Skalierung $\overset{\mathcal F}{\to}$ inverse Skalierung, d.h.
+        \begin{equation*}
+            g(x)=f(cx) \Rightarrow \hat g(z) = \frac{1}{\abs c} \hat f(\frac{z}{\abs c})
+        \end{equation*}
+        \item Konjugation: $g(x) = \overline{f(x)} \Rightarrow \hat g(z) = \overline{\hat f (-z)}$\\
+        Folglich: $f$ reelwertig $\Rightarrow \hat f(z) = \overline{\hat f(-z)}$
+        \item
+        \begin{align*}
+            \text{Grundmode:} \ & \displaystyle \hat f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} f(x) dx\\
+            \text{Analog:} \ & \displaystyle f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} \hat f(x) dx
+        \end{align*}
+        \item Differentation $\overset{\mathcal F}{\to}$ Multiplikation mit Potenzen von z, d.h.
+        \begin{equation*}
+            g(x) = \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d} z_1^{\alpha_1} \cdots z_d^{\alpha_d} \hat f(z)
+        \end{equation*}
+        \item Unkehrung des letzten Punktes:
+        \begin{equation*}
+            g(x) = x_1^{\alpha_1} \cdots x_d^{\alpha_d} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d}  \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1}} \hat f(z)
+        \end{equation*}
+        \item
+        \begin{align*}
+            \text{Faltungssatz:} \  & \mathcal F(f*g) = (2 \pi)^{\frac{d}{2}} \mathcal F(f) \cdot \mathcal F(g), \ \widehat{f*g}=(2 \pi)^{\frac{d}{2}} \hat f \cdot \hat g\\
+            \text{Analog:} \ & \mathcal F (f \cdot g) = \frac{1}{(2 \pi)^{\frac{d}{2}}} \mathcal F(f) * \mathcal F(g), \ \widehat{f \cdot g} = \frac{1}{(2\pi)^{\frac{d}{2}}} \hat f * \hat g
+        \end{align*}
+        d.h.: Faltung $\overset{\mathcal F}{\to}$ Multiplikation und umgekehrt
+    \end{enumerate}
+
+	\Large{\textbf{Zur Erinnerung:}}
+    \normalsize
+    \begin{center}
+        \begin{tikzpicture}[scale = 0.9]
+            \draw (0,0) rectangle (3,3);
+            \draw (1.5,1.5) node[] {\LARGE $f_0$};
+            \draw[->] (3.1,1.5) -- node[above] {$\mathcal F$} (3.9,1.5);
+            \draw (4,0) rectangle (7,3);
+            \draw (5.5,1.5) node[] {\LARGE $\hat f$};
+            \draw[->] (7.1,1.5) -- node[above] {\footnotesize \begin{tabular}{c}
+                Hohe Frequenzen\\abschneiden
+            \end{tabular}} (9.4,1.5);
+            \draw (9.5,0) rectangle (12.5,3);
+            \draw (11,1.5) node[] {\LARGE $\hat u$};
+            \draw[->] (12.6,1.5) -- node[above] {$\mathcal F^{-1}$} (13.4,1.5);
+            \draw (13.5,0) rectangle (16.5,3);
+            \draw (15,1.5) node[] {\LARGE $u$};
+
+            \draw[thin] (4,-2) -- node[below] {\small 0} (7,-2);
+            \draw[thick, name path = P2,shift = {(-2,-3)}]plot [smooth, tension = 0.8]coordinates {(6,1) (6.1,1.3) (6.4,1.1) (6.6,1.6) (7,1.1) (7.3,2.0) (7.5,1.1) (7.7,1.2) (7.8,1.9) (8.1,1.5) (8.5,1.9) (9,1)};
+            \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (4.8,-2.5) -- node[below] {\small tiefe Frequenzen} (6.2,-2.5);
+
+            \draw[thick, name path = P2,shift = {(3.5,-3)}]plot [smooth, tension = 0.8]coordinates {(6,1) (6.1,1.3) (6.4,1.1) (6.6,1.6) (7,1.1) (7.3,2.0) (7.5,1.1) (7.7,1.2) (7.8,1.9) (8.1,1.5) (8.5,1.9) (9,1)};
+            \draw[fill, color = white] (9.5,-2) rectangle (10.3,-0.5);
+            \draw[fill, color = white] (12.5,-2) rectangle (11.7,-0.5);
+            \draw[] (11.7,-0.7) -- (11.7,-2.1) node[below] {\small $r$};
+            \draw[] (10.3,-0.7) -- (10.3,-2.1) node[below] {\small $-r$};
+            \draw[thin] (9.5,-2) -- (12.5,-2);
+            \draw (11,-2.1) node[below] {\small 0};
+
+            \draw[->] (5.5,-3) -- (5.5,-3.5) -- (11,-3.5) -- (11,-2.7);
+
+            \draw[shift = {(0.25,-0.3)}] (6.25,-3.8) node[] {\small \textbullet} (6.5,-4) -- (7,-4) node[below] {\small $-r$} -- (7,-3.6) -- (9,-3.6) -- (9,-4) node[below] {\small $r$} -- (9.5,-4) (8,-4) node[below] {\small 0};
+
+        \end{tikzpicture}
+    \end{center}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[dotted] (-0.3,0) rectangle (-6,-7);
+            \draw (-2.5,0) node[above] {\mim{Zeitbereich}};
+            \draw[dotted] (0.3,0) rectangle (6,-7);
+            \draw (2.5,0) node[above] {\mim{Frequenzbereich}};
+
+            \draw (-3,-1) node[] {$f$};
+            \draw (-2.8,-1) edge[bend right=-15,->] node[above, pos = 0.5] {$\mathcal F$} node[below, pos = 0.5] {\small $n \C log(n)$} (2.8,-1);
+            \draw (3,-1) node[] {$\hat f$};
+            \draw[] (3,-1.5) edge[bend right=-15,->] node[right, pos = 0.5] {\small Mult. mit:} node[left, pos = 0.5] {\small $n$} (3,-5.5);
+            \draw (4.05,-4) node[left] {\footnotesize $\hat g:=$};
+            \draw (4,-4.1) -- (4.3,-4.1) -- (4.3,-3.8) -- (5,-3.8) -- (5,-4.1) -- (5.3,-4.1) (4.65,-4.1) node[] {\tiny $0$};
+            \draw[dotted] (4,-3.8) -- (5.3,-3.8) node[xshift=10] {\footnotesize $\frac{1}{(2 \pi)^\frac{d}{2}}$};
+            \draw (3,-6) node[] {$\hat u$} (3,-6.25) node[right] {\small \begin{tabular}{c}
+                $= \hat f \cdot \hat g \cdot (2 \pi)^{\frac{d}{2}}$\\
+                $= \widehat{f*g}$
+            \end{tabular}};
+            \draw[] (2.5,-6) edge[bend right=-15,->] node[above, pos = 0.5] {\small $n \cdot log(n)$} node[below, pos = 0.5] {$\mathcal F^{-1}$} (-2.5,-6);
+            \draw (-3,-6) node[] {$u$};
+            \draw (-3,-6) node[left] {\small $f*g=$};
+            \draw (-3,-1.5) edge[bend left=-15,->] node[right,pos = 0.5] {\small $n^2$} node[left, pos = 0.5] {\small Falltung, $*g$} (-3,-5.5);
+            \draw [thick, name path = P2,->]plot [smooth, tension = 0.9]coordinates {(-2.5,-1.5) (1.5,-1.5) (1.5,-5) (-2.5,-5.5)};
+            \draw (2,-3.5) node[left] {\small $n \cdot log(n)$};
+        \end{tikzpicture}
+    \end{center}
+
 
 Genauer: 
 $$ \mathcal{F} u = \hat{v} = $$
 $$ \begin{aligned}
-	g(x) &= \frac{1}{2\pi)^{\frac{d}{2}}} (\inv{\mathcal{F}} \chi_{[-r,r]})(x)\\
-			 &= \frac{1}{2\pi)^{\frac{d}{2}}}\frac{1}{2\pi)^{\frac{d}{2}}}
-			 		\int_{\R^d} \chi_{[-r,r]}(z) e^{i \fop{z,x} dz} \\
+	g(x) &= \frac{1}{(2\pi)^{\frac{d}{2}}} (\inv{\mathcal{F}} \chi_{[-r,r]^d})(x)\\
+			 &= \frac{1}{(2\pi)^{\frac{d}{2}}}\frac{1}{(2\pi)^{\frac{d}{2}}}
+			 		\int_{\R^d} \chi_{[-r,r]^d}(z) e^{i \fop{z,x} dz} \\
 			 & \overset{1d}{=} \frac{1}{2\pi} \int_{-\infty}^{\infty} \chi_{[-r,r]} 
 			 	 e^{izx}dz \\
 			 &= \frac{1}{2\pi} \int_{-r}^{r} e^{izx} dz 
@@ -468,33 +699,60 @@ $$ \begin{aligned}
 
 $$ \hat{g} (0) = (\mathcal{F} g)(0) = \frac{1}{2}$$
 
+Es ist zu bemerken, dass $g$ eine Art Tensor Struktur besitzt, was in etwa bedeutet das sich die Funktion in belibigen Dimensionen als Produkt der Funktion in einer Dimensionen darstellen lässt.%So richtig
+
+\mim{Gauß-Kern}:
+\begin{align*}
+	G(x) =& \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}} \Rightarrow G\left( \srmatrix{x_1\\\vdots\\x_d} \right) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-x_1^2-x_2^2 + \cdots + x_d^2}{2}}\\
+	=& \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_1^2}{2}}\right) \cdot \ \cdots \ \cdot \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_d^2}{2}}\right) = G(x_1) \cdot \ \cdots \ \cdot G(x_d)
+\end{align*}
+
 \todoKom{allerhand noch im Skript und ein Tafelfoto}
 
 \section{Filterbreite und Glättung}
 
-klar: $\frac{1}{25}$%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVEONE
-\end{minipage}
-glättet mehr als $\frac{1}{9}$%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVETWO
-\end{minipage}
+\begin{center}
+	\begin{tikzpicture}
+		\foreach \i in {0,...,4}
+			\foreach \j in {0,...,4}
+				\draw (0.5*\i + 0.25,0.5*\j + 0.25) node[] {\small 1};
+		\draw[step = 0.5] (0,0) grid (2.5,2.5);
+		\draw (0,1.25) node[left] {klar ist: $\frac{1}{25}$};
+		\draw (3,1.25) node[right] {'glättet mehr als': $\frac{1}{9}$};
+		\draw[step = 0.5, shift = {(6.5,0.5)}] (0,0) grid (1.5,1.5);
+		\foreach \i in {0,...,2}
+			\foreach \j in {0,...,2}
+				\draw (0.5*\i + 6.75,0.5*\j + 0.75) node[] {\small 1};
+	\end{tikzpicture}
+\end{center}
 
 Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
 Setze 
 	$$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
 
-Bsp (in $d =1 $0):%
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVETHREE  
-\end{minipage}
-$\df$
-\begin{minipage}{0.4\linewidth}
-%\tikzpictureQFOURYTFIVEFOUR
-\end{minipage}
+Bsp (in $d =1 $):
+\begin{center}
+	\begin{tikzpicture}
+		\draw[->] (-2.2,0) -- (2.2,0) node[right] {\small x};
+		\draw[->] (0,-0.1) -- (0,2.2) node[above] {\small y};
+		\draw (-2,0.1) -- (-2,-0.1) node[below] {\small $-1$};
+		\draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+		\draw (0.1,2) -- (-0.1,2) node[left] {\small $1$};
+		\draw[thick] (-2,0) -- (0,2) -- (2,0);
+		\draw (1.2,1.2) node[rotate = -45] {\small $y=m(x)$};
+		\draw[->] (3.8,0) -- (12.2,0) node[right] {\small x};
+		\draw[->] (8,-0.1) -- (8,1.2) node[above] {\small y};
+		\draw (4,0.1) -- (4,-0.1) node[below] {\small $-1$};
+		\draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+		\draw (8.1,1) -- (7.9,1) node[left, xshift = -9, yshift = 4] {\small $\frac{1}{2}$};
+		\draw[thick] (4,0) -- (8,1) --(12,0);
+		\draw (10,0.8) node[rotate = -12.5] {\small $y=m(x)$};
+		\draw[->,double] (2,1.5) -- node[above] {\small $s=2$} (4,1.5);
+	\end{tikzpicture}
+\end{center}
 
-Bsp: G \dots Gauß-Kern, Skalierung mit Fehler $s > 0$
-$$ \df G_s(x) = \frac{1}{s^d} G( \frac {x} {s} ) = ...$$
-\todoKom{siehe S. 45}
-Mo 13 Nov 2017 12:57:12 CET
+Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}}$\\
+Skalierung mit Fehler $s > 0$
+$$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
+
+Skalierung $s \hat = $ Standardabweichung $\sigma$
