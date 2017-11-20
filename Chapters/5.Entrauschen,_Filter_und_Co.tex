@@ -756,3 +756,114 @@ Skalierung mit Fehler $s > 0$
 $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
 
 Skalierung $s \hat = $ Standardabweichung $\sigma$
+\todoKom{hier noch mehr im Skript p. 45}
+
+\todoKom{Ab hier: Livetex 20.11. }
+
+\section{Differenzenfilter}
+
+Bisher: Glättung $\hat{=}$ Mittelwerte bilden $\hat{=}$ Summen/Intergrale\\
+Bald: 	Schärfen $\hat{=}$ Unterschiede [arrow Differenzen !]/Kontraste hervorheben 
+	$\hat{=}$ Differenzen /Ableitungen \\
+
+Diskretisierung von Ableitungen
+
+\begin{minipage}{0.4\linewidth}
+% siehe p46 1
+test
+\end{minipage}
+\begin{itemize}[]
+	\item vorwärts:  $u(k) = \frac {f(k+1) - f(k)} {h}$
+	\item rückwärts: $u(k) = \frac {f(k) - f(k-1)} {h} $
+	\item zentral: $u(k) = \frac {f(k+1) - f(k-1)} {2h}$
+\end{itemize}
+\todomp{Aussagen in Filter}
+
+2. Ableitung:
+$\begin{aligned}
+	u(k) &\approx \frac {f'(k+1) - f'(k)} {h}  \\	
+			 &\approx \frac { \frac {f(k+1) - f(k)} {h} - \frac {f(k) - f(k-1)} {h}} {h}
+			 &\approx \frac {f(k+1) - 2 f(k) + f(k-1)} {h^2}
+\todomp{Aussagen in Filter}
+\end{aligned}$
+
+In 2D: $ \frac {\partial} {\partial x} \hat{=}$ \todomp{filter  -1 1} , 
+	$ \frac {\partial} {\partial y} \hat{=}$ \todomp{filter  -1 1},
+$ \frac {\partial^2} {\partial x^2} \hat{=}$ \todomp{filter 1 -2 1}
+$ \frac {\partial^2} {\partial y^2} \hat{=}$ \todomp{filter 1 -2 1} \\
+
+$\Delta = \frac {\partial^2} {\partial x^2} + \frac {\partial^2} {\partial y^2}$ 
+= todomp{filer!}
+
+\todoKom{Beobachtung zu Massen}
+
+\section{Glättungsfilter und partielle Differentialgleichung}
+
+Hatten gesehen: $m = \frac{1} {5}$ \todomp{filter} glättet unter allen 
+\todomp{Filter} am besten. 
+
+Idee: Rauschen weiter verringern, in dem man $m \boxast $ \emph{wiederholt} 
+anwendet.
+
+Folgen von Bildern: 
+\begin{minipage}{1\linewidth}
+ bilder 
+\end{minipage}
+
+$\begin{aligned}
+	u^{(n+1)} - u^{(n)}	 &= m \boxast u^{(n)}[underbrace] - \delta 
+		\boxast u ^ {(n)} [underbrace] \\
+		&= (m - \delta) \boxast u^{(n)} \\
+		&= (\todomp{Filter})	\boxast u^{(n)} \\
+		&= \frac {1} {5} \todomp{filter} \boxast u^{(n)}
+\end{aligned}$
+\todomp {gelbe Kommentare von der Tafel}
+\todoKom{Gleichung 5.11 hinzufügen mit underbraces}
+\begin{equation}[5.11]
+u
+\end{equation}
+
+kontinuierlich: Funktion $u$ 
+	$$ u (x[arrow:2D (x_1,x_2)] , t[arrow:Zeit] ) $$
+$\df$ \todomp{Verweis auf eq 5.11} ist eine Diskretisierung 
+(1. Zeitintervall im Euler-Verfahren) der partiellen Differentialgleichung
+
+\begin{equation}
+\frac {\partial u} {\partial t} = \Delta u \quad 
+\text{Wärmeleitgleichung oder Diffusionsgleichung}
+\end{equation}
+
+Zum Zeitpunkt $t = 0$ möge 
+
+\begin{equation}
+	u (x, 0) = u ^{(0)} (x) = f(x) \quad \text{Anfangsbedingung}
+\end{equation}
+gelten.
+
+Voranschreiten der Zeit $t$ $\df$ Wärmeleitung / Diffusion 
+
+$\df$ stationärer Zustand ? ( keine Änderung mehr 
+	$ \frac {\partial u} {\partial t} = 0 $  )
+Muss also $\Delta = 0$ erfüllen.
+
+\todoKom{Bildchen}
+
+Kontinuierlicher Fall:
+Es gibt eine explizite Formel für die Lösung der Differentialgleichung 
+\todomp{Ref. auf (5.12)} mit Anfangsbedingung \todomp{Ref. 5.13}:
+$$ u (x,t) = \left( [arrow:Gauss-Kern]G_{\sqrt{2 t}[ar:mitSkal.]} \ast u ^{(0)} \right) (x)$$
+
+\begin{proof}
+	\small
+	\todoKom{vielleicht noch machen? siehe p 51}
+	zu zeigen: $ \frac {\partial u} {\partial t} = \Delta u$	
+\end{proof}
+
+\begin{minipage}{1\linewidth}
+ Bildchen zum kontinuierlichem Fall 
+\end{minipage}
+
+\begin{minipage}{1\linewidth}
+ Bildchen zum diskreten Fall 
+\end{minipage}
+
