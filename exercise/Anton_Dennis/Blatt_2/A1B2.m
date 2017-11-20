@@ -3,7 +3,7 @@ A = rgb2gray(imread('schneehase2.jpg'));
 
 tic
 B = lineareKontraststreckung(A); 
-%imwrite([A B],'output_B.jpg')
+imwrite([A B],'output_B.jpg')
 toc
 
 tic

@@ -1,0 +1,169 @@
+   set nocompatible              " be iMproved, required
+   filetype off                  " required
+	 
+   " set the runtime path to include Vundle and initialize
+   set rtp+=~/.vim/bundle/Vundle.vim
+   call vundle#begin()
+   "alternatively, pass a path where Vundle should install plugins
+   "call vundle#begin('~/some/path/here')
+
+   " let Vundle manage Vundle, required
+   Plugin 'VundleVim/Vundle.vim'
+	 Plugin 'itchyny/calender.vim'
+	 Plugin 'kana/vim-arpeggio.vim'
+	 Plugin	'UltiSnips.vim'
+	 Plugin 'jpalardy/vim-slime'
+	 "Plugin	'valloric/youcompleteme'
+		
+    " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+    let g:UltiSnipsExpandTrigger="<c-k>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+	
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+
+   " The following are examples of different formats supported.
+   " Keep Plugin commands between vundle#begin/end.
+   " plugin on GitHub repo
+   Plugin 'tpope/vim-fugitive'
+   " plugin from http://vim-scripts.org/vim/scripts.html
+   " Plugin 'L9'
+   " Git plugin not hosted on GitHub
+   Plugin 'git://git.wincent.com/command-t.git'
+   " git repos on your local machine (i.e. when working on your own plugin)
+   Plugin 'file:///home/gmarik/path/to/plugin'
+   " The sparkup vim script is in a subdirectory of this repo called vim.
+   " Pass the path to set the runtimepath properly.
+   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+   " Install L9 and avoid a Naming conflict if you've already installed a
+   " different version somewhere else.
+   " Plugin 'ascenator/L9', {'name': 'newL9'}
+
+   " All of your Plugins must be added before the following line
+   call vundle#end()            " required
+   "filetype plugin indent on    " required
+   " To ignore plugin indent changes, instead use:
+   filetype plugin on
+   "
+   " Brief help
+   " :PluginList       - lists configured plugins
+   " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+   " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+   " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+   "
+   " see :h vundle for more details or wiki for FAQ
+   " Put your non-Plugin stuff after this line
+	 
+"%%%%%%%%%%% stuff for inner usage %%%%%%%%%%
+"set dictionary=/Users/schmeckpeper/Documents/B_stud/TUHH/BSc_Technomathematik/B_Vertiefungsstudium/Mathematik/
+
+"Arpeggio chord typing
+call arpeggio#load() "load arpeggio, so I can use the function
+"Umlaute
+call arpeggio#map('i','',0,'[u','ü')
+call arpeggio#map('i','',0,'{U','Ü')
+call arpeggio#map('i','',0,'[o','ö')
+call arpeggio#map('i','',0,'{O','Ö')
+call arpeggio#map('i','',0,'[a','ä')
+call arpeggio#map('i','',0,'{A','Ä')
+"Commands
+call arpeggio#map('i','',0,'xk','<c-x><c-k>')
+call arpeggio#map('i','',0,'xp','<c-x><c-p>')
+"mathsstuff
+call arpeggio#map('i','',0,'int','\int_{}^{} dx')
+call arpeggio#map('i','',0,'tx','\text{}')
+call arpeggio#map('i','',0,'nm','\norm{}')
+call arpeggio#map('i','',0,'fp','fop')
+call arpeggio#map('i','',0,'oper','^\perp')
+call arpeggio#map('i','',0,'em','enm <c-k>')
+"call arpeggio#map('i','',0,'fra','\frac {} {}')
+
+" All about the rightindention
+	set smartindent
+	set indentexpr=	
+	set ai
+	set nocindent
+	set breakindent
+	set linebreak
+	set showbreak=..
+	"set nosmartindent
+	"set foldmethod=indent
+	"filetype indent off
+	"filetype plugin indent off
+
+"set dictionary=~/.vim/dictionaries/vim-latex-suite-dictionary
+
+"hightlight current line
+"set cursorline
+
+" Make tabs as wide as two spaces
+set tabstop=2
+set shiftwidth=2	
+" Enable syntax hightlighting
+syntax on
+colorscheme slate
+
+"Use UTF-8 without BOM
+set encoding=utf-8 nobomb
+
+" Dont add empty newlines at the end of files
+	"set binary
+	"set noeol
+
+" ????????????????????  Is this nesscessary for anything?   ????????????????????
+" Centralize backups, swapfiles und undo history
+	"set backupdir=~/-vim/backups
+	"set directory=~/.vim/swaps
+	"if exists("&undodir")
+	"set undodir=~/.vim/undo
+	"endif
+
+set showmode "show the current mode
+set title "Show the filename in the window titlebar
+set number
+"set nowrap
+"hightlights the backround after 80 characters 
+"if (&ft=='hs')
+	highlight OverLength ctermfg=yellow ctermbg=green
+	"guibg=#592929
+	match OverLength /\%81v.\+/
+"endif
+
+"To comment and uncomment C++
+	"map <C-c> :s/^/\/\//<Enter>
+	"map <C-u> :s/^\/\///<Enter>
+
+map <C-m> :! make<Enter> 
+"map <C-a><C-a> :make ex<m> 
+map <C-t> :s/^/	/<Enter>
+map <C-u> :s/^	//<Enter>
+"
+ " highlight todonotes
+hi! todonote ctermbg=green ctermfg=black
+let l = matchadd("todonote","TodoDONE")
+hi! todonotes ctermbg=red ctermfg=gray
+let m = matchadd("todonotes", "todor")
+let m = matchadd("todonotes", "todoo")
+let m = matchadd("todonotes", "todoy")
+let m = matchadd("todonotes", "todog")
+let m = matchadd('todonotes','todo')
+let o = matchadd("todonotes",'TODO')
+
+"hi! itemes ctermbg=blue ctermfg=yellow
+"let m = matchadd("itemes","item")
+"
+"unsorted
+	set hlsearch
+"set complete+=k/Users/schmeckpeper/Documents/B_stud/TUHH/BSc_Technomathematik/B_Vertiefungsstudium/Mathematik/Mathematische_Bildverarbeitung/MaBi/**/*.tex
+"set complete+=k/Users/schmeckpeper/Documents/B_stud/TUHH/BSc_Technomathematik/B_Vertiefungsstudium/Mathematik/Mathematische_Bildverarbeitung/MaBi/**/*.sty
+set complete+=k./**/*.tex
+set complete+=k./**/*.sty
+
+command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis 
+	\ | wincmd p | diffthis
+
+autocmd BufRead,BufNewFile *.hs setlocal expandtab
+let g:slime_target = "tmux"
+"let g:slime_targe = "vimterminal"
+let g:slime_paste_file = tempname()

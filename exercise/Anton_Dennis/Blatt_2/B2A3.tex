@@ -5,7 +5,7 @@
 \usepackage{exercise}
 
 \begin{document}
-\section{Blatt 2. Aufgabe 3}
+\section*{Blatt 2. Aufgabe 3}
 Der $L^p$ isometrisch-isomorph zum $\ell^p$, d.h., dass 
 \emph{wesentliche} Struktur und Eigenschaften äquivalent zwischen beiden 
 Räumen erhalten bleibt ist. Damit sollten sich die Beweise für
@@ -14,6 +14,23 @@ $L^1$ auswirken.
 
 \begin{enumerate}[1)]
 	\item $(f \ast g) \ast h = f \ast (g \ast h)$ 
+		\vspace{-1mm}
+		\begin{proof}%
+			\[\begin{aligned}
+				(f \ast g) \ast h (k) = \sum_{j\in\Z} 
+					\left(f \ast g)(	k - j ) h(j) \right)
+				&	= \sum_{j\in\Z} \left(\sum_{l \in \Z} f(k-(j+l)\right) \ast g(l)) h(j)
+			  \\
+				& = \sum_{\xi\in\Z} \sum_{\kappa \in \Z} 
+					f(k-\xi) g(\xi - \kappa) h(\kappa) 
+				\\
+				& = \sum_{\xi\in\Z} f(k-\xi) \left(\sum_{\kappa \in \Z} 
+					g(\xi - \kappa) h(\kappa) \right)
+				\\
+				 = \sum_{j\in\Z} f(k-j) (g \ast h) (j) 
+				 & = f \ast (g \ast h) (k)
+			\end{aligned}\]
+		\end{proof}
 	\item $f\ast g = g \ast f$. 
 	\item $f \in \ell^(\Z), g \in \ell^q(\Z)$. Dann ist $f\ast g \in \ell^r (Z)$ 
 		mit $ \frac {1} {p} + \frac {1} {q} = 1 + \frac {1} {r}$, $p,q,r \geq 1$
