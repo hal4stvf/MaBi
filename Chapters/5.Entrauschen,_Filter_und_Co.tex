@@ -773,7 +773,7 @@ Skalierung $s \hat = $ Standardabweichung $\sigma$
 	}
 	
 
-\subsection{Differenzenfilter}
+\section{Differenzenfilter}
 
     Bisher: Glättung $\widehat =$ Mittelwert bilden $\widehat =$ Summe/Integrale\\
     Jetzt: Schärfen $\widehat =$ Differenzen/Kontraste hervorheben $\widehat =$ Differenzen/Ableitungen\\
@@ -910,7 +910,7 @@ Skalierung $s \hat = $ Standardabweichung $\sigma$
         \hline
     \end{tabular}\]
 
-    \subsection{Glättungsfilter und partielle Differentialgleichungen}
+\section{Glättungsfilter und partielle Differentialgleichungen}
 
     Wir haben gesehen: $\displaystyle m = \frac{1}{5}\begin{tabular}{|c|c|c|}
         \hline
@@ -977,7 +977,9 @@ Skalierung $s \hat = $ Standardabweichung $\sigma$
             \hline
         \end{tabular} u^{(n)}
     \end{align*}
-
+\begin{equation}
+\todomp{noch einmal schauen was 5.10 ist}
+\end{equation}
     Somit gilt insgesamt:
 
     \begin{equation}\label{eq:5.11}
@@ -1030,7 +1032,7 @@ Skalierung $s \hat = $ Standardabweichung $\sigma$
 
     \begin{center}
         \begin{tikzpicture}
-            \draw[->] (0,0) node[left] {\small kontinueirlich:} -- (10,0) node[right] {\small t};
+            \draw[->] (0,0) node[left] {\small kontinuierlich:} -- (10,0) node[right] {\small t};
 
             \draw (1,-0.5) rectangle (2,-1.5);
             \draw (1.5,-1) node {\large $u^{(0)}$};
@@ -1053,4 +1055,146 @@ Skalierung $s \hat = $ Standardabweichung $\sigma$
             \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
         \end{tikzpicture}
     \end{center}
+
+\todoKom{Ab hier Livetex 24.11}
+
+Wiederholung Diffusionsgleichung letzte Woche:
+
+\todoKom{Vergleich kontinuierlicher mit dem diskreten Fall.}
+
+\begin{tikzpicture}
+  \draw[help lines] (0,0) grid (15,3);
+\end{tikzpicture}
+
+
+\section{Isotrope und anisotrope Diffusion}
+
+Haben gesehen: Glättung/Diffusion verringert rauschen
+
+Aber: Auch Kanten/Details werden verwischt.
+
+Ausweg: Diffusion steuern, so dass sie an Kanten weniger stark glättet. 
+
+\emph{an Kanten} Stellen mit großer Änderungsrate in $x$- oder $y$-Richtung,
+oder beides, d.h.:
+
+$$ | \frac {\partial u} {\partial x}|^2 + 
+	|\frac {\partial u} {\partial y}|^2 = \norm{
+		\begin{pmatrix}
+			\frac {\partial u} {\partial x}	\\
+			\frac {\partial u} {\partial y}	\\
+		\end{pmatrix}	
+		}^2[\nabla u]$$
+
+
+\begin{equation}
+\text{Plan:} \nabla u 
+	\begin{cases} 
+		\text{groß} 	& \df \text{Diffusion } \searrow \\
+		\text{klein}	& \df \text{Diffusion normal} \\
+	\end{cases}
+\end{equation}
+Diffusionsgleichung: 
+	$$ \frac {\partial u} {\partial t} = \Delta u = 
+	\frac {\partial u} {\partial x} \; \frac {\partial u} {\partial x} u
+	+ 
+	\frac {\partial u} {\partial y} \; \frac {\partial u} {\partial y} u
+	=\todomp{\dots} = div (M) (\nabla u)$$ 
+
+Ansatz für $M$:
+
+	\begin{minipage}{0.5\linewidth}
+		%
+	  \begin{enumerate}[a)]
+
+		  \item	$M = I = 
+				\begin{pmatrix}
+					1 & 0 \\
+					0 & 1 \\
+				\end{pmatrix}$ $\df$ übliche Diffusion
+
+			\item $M = g(\norm{\nabla u(x,y)}) \cdot I$
+				\begin{itemize}[]
+					\item $g(s) = \frac {1} { (\frac {s} {\kappa})^2 +1 }	$ 
+						mit Parameter $\kappa > 0$
+					\item $\df$ Perona \& Malik (1990)
+				\end{itemize}
+
+			\item $M = 
+					\begin{pmatrix}
+						g(| \frac {\partial u} {\partial x}|)	 & 0 \\	
+						0 & g(| \frac {\partial u} {\partial y}|)	\\	
+					\end{pmatrix}	
+				$
+			
+		\end{enumerate}
+		%
+	\end{minipage}
+	%
+	\begin{minipage}{0.5\linewidth}
+	 	\begin{tikzpicture}
+	 	  \draw[help lines] (0,0) grid (5,5);
+	 	\end{tikzpicture} 
+		\begin{itemize}
+		  \item Kante mit $\norm{\nabla u} < \kappa$ 
+				werden gelättet ($g > \frac{1}{2}$)
+			\item Kante mit $\norm{\nabla u} \geq \kappa$
+				werden nicht geglättet ($g \leq \frac{1}{2}$)
+		\end{itemize}
+	\end{minipage}
+
+\todoKom{Bild zu isotrop und anisotrop. (Kann man sich sparen?)}
+
+\newcommand{\vecx}{\mathbf{x}}
+Im diskreten Fall:
+$\vecx \in \Z^2$ $\vecx_W = \vecx + 
+	\begin{pmatrix}
+		-1 \\ 0
+	\end{pmatrix}
+$, usw. 
+
+Sei $M = 
+\begin{pmatrix}
+	c_1 (\vecx) & 0 \\
+	0 & c_1 (\vecx) \\	
+\end{pmatrix}$
+
+\begin{minipage}{0.5\linewidth}
+ \begin{tikzpicture}
+   \draw[help lines] (0,0) grid (5,5);
+ \end{tikzpicture} 
+\end{minipage}
+%
+\begin{minipage}{0.5\linewidth}
+ $
+ 	\begin{aligned}
+ 		div( M \cdot \nabla u(\vecx)) 
+			&= ( \frac {\partial } {\partial x} \; 
+				\frac {\partial } {\partial x})\left[
+				\begin{pmatrix}
+					c_1 (\vecx) & 0 \\
+					0 & c_2 (\vecx) \\	
+				\end{pmatrix}
+				\begin{pmatrix}
+					\frac {\partial u} {\partial x} (\vecx) \\	
+					\frac {\partial u} {\partial y} (\vecx) \\	
+				\end{pmatrix}	
+			\right] \\
+			%
+			&= ( \frac {\partial } {\partial x} \; 
+				\frac {\partial } {\partial x})
+				\begin{pmatrix}
+					c_1 (\vecx) \cdot \frac {\partial u} {\partial x} (\vecx)\\
+					c_2 (\vecx) \cdot \frac {\partial u} {\partial y} (\vecx)\\	
+				\end{pmatrix} \\
+			%
+			&\approx ( \frac {\partial } {\partial x} \; 
+				\frac {\partial } {\partial x})
+				\begin{pmatrix}
+					c_1 (\vecx) \cdot \todomp{..})\\
+					c_2 (\vecx) \cdot \todomp)\\	
+				\end{pmatrix} \\
+ 	\end{aligned}
+ $ 
+\end{minipage}
 
