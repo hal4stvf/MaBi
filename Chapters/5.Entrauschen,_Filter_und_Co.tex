@@ -758,112 +758,299 @@ $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s
 Skalierung $s \hat = $ Standardabweichung $\sigma$
 \todoKom{hier noch mehr im Skript p. 45}
 
-\todoKom{Ab hier: Livetex 20.11. }
+\newcommand{\mtitle}[1] {
+    \begin{center}
+        \large{\textbf{#1}}
+    \end{center}
+}
 
-\section{Differenzenfilter}
+\newcommand{\filter}[1] {
+	\begin{tabular}{|c|c|c|}
+		\hline
+		#1\\
+		\hline
+	\end{tabular}
+	}
+	
 
-Bisher: Glättung $\hat{=}$ Mittelwerte bilden $\hat{=}$ Summen/Intergrale\\
-Bald: 	Schärfen $\hat{=}$ Unterschiede [arrow Differenzen !]/Kontraste hervorheben 
-	$\hat{=}$ Differenzen /Ableitungen \\
+\subsection{Differenzenfilter}
 
-Diskretisierung von Ableitungen
+    Bisher: Glättung $\widehat =$ Mittelwert bilden $\widehat =$ Summe/Integrale\\
+    Jetzt: Schärfen $\widehat =$ Differenzen/Kontraste hervorheben $\widehat =$ Differenzen/Ableitungen\\
 
-\begin{minipage}{0.4\linewidth}
-% siehe p46 1
-test
-\end{minipage}
-\begin{itemize}[]
-	\item vorwärts:  $u(k) = \frac {f(k+1) - f(k)} {h}$
-	\item rückwärts: $u(k) = \frac {f(k) - f(k-1)} {h} $
-	\item zentral: $u(k) = \frac {f(k+1) - f(k-1)} {2h}$
-\end{itemize}
-\todomp{Aussagen in Filter}
+    \mtitle{Diskretisierung von Ableitungen durch Differenzenquotienten}
+    \ \\
+    \begin{minipage}[c]{0.25\linewidth}
+        \begin{center}
+            \begin{tikzpicture}
+                
+                \draw[scale=1,domain=-0.75:1.5,smooth,variable=\x]  plot ({\x},{(\x * \x)});
+                \draw[] (-1,-0.3) -- (2,-0.3);
+                \draw[dotted] (-0.5,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k-1}$} -- (-0.5,0.25) node[] {\small \textbullet};
+                \draw[dotted] (0.25,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k}$} -- (0.25,0.0125) node[] {\small \textbullet};
+                \draw[dotted] (1,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k+1}$} -- (1,1) node[] {\small \textbullet};
+                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (-0.5,-0.7) -- node[below] {\small $h$} (0.25,-0.7);
+                \draw[dotted] (1,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k+1}$} -- (1,1) node[] {\small \textbullet};
+                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (0.25,-0.7) -- node[below] {\small $h$} (1,-0.7);
+            \end{tikzpicture}
+        \end{center}
+    \end{minipage}
+    \hfill\vrule\hfill
+    \begin{minipage}[c]{0.4\linewidth}
+        (hier bedeutet $f(k) = f(x_k)$)\\
+        Vorwärts: $\displaystyle u(h)= \frac{f(k+1) - f(k)}{h}$
+        Rückwärts: $\displaystyle u(h)= \frac{f(k) - f(k-1)}{h}$
+        Zentral: $\displaystyle u(h)= \frac{f(k+1) - f(k-1)}{2h}$
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.3\linewidth}
+        \ \\
+        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+        \end{tabular} \boxast f$\\
+        \ \\
+        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+        \end{tabular} \boxast f$\\
+        \ \\
+        $u=\displaystyle \frac{1}{2h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+            \end{tabular} \boxast f$\\
+    \end{minipage}
+    \ \\
 
-2. Ableitung:
-$\begin{aligned}
-	u(k) &\approx \frac {f'(k+1) - f'(k)} {h}  \\	
-			 &\approx \frac { \frac {f(k+1) - f(k)} {h} - \frac {f(k) - f(k-1)} {h}} {h}
-			 &\approx \frac {f(k+1) - 2 f(k) + f(k-1)} {h^2}
-\todomp{Aussagen in Filter}
-\end{aligned}$
+    \mtitle{2. Abbleitung:}
 
-In 2D: $ \frac {\partial} {\partial x} \hat{=}$ \todomp{filter  -1 1} , 
-	$ \frac {\partial} {\partial y} \hat{=}$ \todomp{filter  -1 1},
-$ \frac {\partial^2} {\partial x^2} \hat{=}$ \todomp{filter 1 -2 1}
-$ \frac {\partial^2} {\partial y^2} \hat{=}$ \todomp{filter 1 -2 1} \\
+    \begin{align*}
+        u(h) \approx & \frac{f'(k+1) - f'(k)}{h} \text{(vorwärts)}\\
+        \approx & \frac{\frac{f(k+1) - f(k)}{h} - \frac{f(k) - f(k-1)}{h}}{h} \text{(rückwärts)} \\
+        = & \frac{f(k+1) -2 f(k) + f(k+1)}{h^2}
+    \end{align*}
 
-$\Delta = \frac {\partial^2} {\partial x^2} + \frac {\partial^2} {\partial y^2}$ 
-= todomp{filer!}
+    Also folgt $\displaystyle u:=\begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+        \end{tabular} \boxast f$ und $\displaystyle \frac{1}{h^2}\begin{tabular}{|c|c|c|}
+            \hline
+            1 & -2 & 1\\
+            \hline
+            \end{tabular} = \frac{1}{h}\begin{tabular}{|c|c|c|}
+                \hline
+                0 & -1 & 1\\
+                \hline
+                \end{tabular} * \frac{1}{h}\begin{tabular}{|c|c|c|}
+                    \hline
+                    -1 & 1 & 0\\
+                    \hline
+                    \end{tabular}$\\
+    Denn:
 
-\todoKom{Beobachtung zu Massen}
+    \begin{align*}
+         & \frac{1}{h} \filter{-1 & 1 & 0}\\
+        =& \frac{1}{h} \filter{0 & 1 & -1} * \left(\frac{1}{h} \filter{1 & -1 & 0} * f\right)\\
+        =& \left(\frac{1}{h} \filter{ 0 & 1 & -1} * \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
+        =& \left(\frac{1}{h} \filter{ -1 & 1 & 0} \boxast \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
+        =& \frac{1}{h^2} \filter{1 & -2 & 1} * f \\
+        =&\frac{1}{h^2} \filter{1 & -2 & 1} \boxast f 
+    \end{align*}
 
-\section{Glättungsfilter und partielle Differentialgleichung}
+    In 2D: $\displaystyle \frac{\partial}{\partial x} \widehat = \ \begin{tabular}{|c|c|c|}
+        \hline
+        0 & -1 & 1\\
+        \hline
+    \end{tabular}, \ \frac{\partial}{\partial y} \widehat = \begin{tabular}{|c|}
+        \hline
+        0\\
+        \hline
+        -1\\
+        \hline
+        1\\
+        \hline
+    \end{tabular}, \ \frac{\partial^2}{\partial x^2} \widehat = \begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+    \end{tabular}, \ \frac{\partial^2}{\partial y^2} \widehat = \begin{tabular}{|c|}
+        \hline
+        1\\
+        \hline
+        -2\\
+        \hline
+        1\\
+        \hline
+    \end{tabular}$.\\
+    \ \\
+    \mim{Diskreter Laplace Operator}:
+    \[\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \widehat = \ \begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+    \end{tabular} + \begin{tabular}{|c|}
+        \hline
+        1\\
+        \hline
+        -2\\
+        \hline
+        1\\
+        \hline
+    \end{tabular} = \begin{tabular}{|c|c|c|}
+        \hline
+         0 & 1 & 0\\
+        \hline
+        1 & -4 & 1\\
+        \hline
+         0 & 1 & 0\\
+        \hline
+    \end{tabular}\]
 
-Hatten gesehen: $m = \frac{1} {5}$ \todomp{filter} glättet unter allen 
-\todomp{Filter} am besten. 
+    \subsection{Glättungsfilter und partielle Differentialgleichungen}
 
-Idee: Rauschen weiter verringern, in dem man $m \boxast $ \emph{wiederholt} 
-anwendet.
+    Wir haben gesehen: $\displaystyle m = \frac{1}{5}\begin{tabular}{|c|c|c|}
+        \hline
+        0 & 1 & 0\\
+        \hline
+        1 & 1 & 1\\
+        \hline
+        0 & 1 & 0\\
+        \hline
+    \end{tabular}$ ist unter allen 5-Punkt Filtern der am besten glättende.\\
+    Idee: Rauschen weiter verringern indem man $m \boxast$ wiederholt anwendet $\Rightarrow$ Folge von Bildern:\\
+    
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) rectangle (1,1);
+            \draw (0.5,0.5) node {\small $f$};
+            \draw (0.5,0.2) node {\tiny $:= u ^{(0)}$};
+            \draw[->] (1.1,0.5) -- node[above] {\small $m \boxast$}(1.9,0.5);
+            \draw (2,0) rectangle (3,1);
+            \draw (2.5,0.5) node {\small $u^{(1)}$};
+            \draw[->] (3.1,0.5) -- node[above] {\small $m \boxast$}(3.9,0.5);
+            \draw (4,0) rectangle (5,1);
+            \draw (4.5,0.5) node {\small $u^{(2)}$};
+            \draw (5,0.5) node[right] {\LARGE ...};
+        \end{tikzpicture}
+    \end{center}
+    
+    \begin{align*}
+        \Rightarrow u^{(n+1)} - u^{(n)} & = \text{(Unterschied zwischen 'Zeit' Punkt $n$ und $n+1$)}\\
+        &= \underbrace{m \boxast u^{(n)}}_{u^{n+1}} - \underbrace{\delta \boxast u^{(n)}}_{u^{(n)}} \text{mit } \delta = \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 0 & 0\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+            0 & 0 & 0\\
+            \hline
+        \end{tabular}\\
+        &=(m - \delta) \boxast u^{(n)}\\
+        &=\left( \frac{1}{5}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & 1 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular} - \frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 0 & 0\\
+            \hline
+            0 & 5 & 0\\
+            \hline
+            0 & 0 & 0\\
+            \hline
+        \end{tabular}\right) \boxast u^{(n)}\\
+        &= \frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & -4 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular} u^{(n)}
+    \end{align*}
 
-Folgen von Bildern: 
-\begin{minipage}{1\linewidth}
- bilder 
-\end{minipage}
+    Somit gilt insgesamt:
 
-$\begin{aligned}
-	u^{(n+1)} - u^{(n)}	 &= m \boxast u^{(n)}[underbrace] - \delta 
-		\boxast u ^ {(n)} [underbrace] \\
-		&= (m - \delta) \boxast u^{(n)} \\
-		&= (\todomp{Filter})	\boxast u^{(n)} \\
-		&= \frac {1} {5} \todomp{filter} \boxast u^{(n)}
-\end{aligned}$
-\todomp {gelbe Kommentare von der Tafel}
-\todoKom{Gleichung 5.11 hinzufügen mit underbraces}
-\begin{equation}[5.11]
-u
-\end{equation}
+    \begin{equation}\label{eq:5.11}
+        \underbrace{u^{(n+1)} - u^{(n)}}_{\widehat = \frac{\partial u}{\partial t}} = \underbrace{\frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & -4 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular}}_{\widehat = \Delta u}
+    \end{equation}
 
-kontinuierlich: Funktion $u$ 
-	$$ u (x[arrow:2D (x_1,x_2)] , t[arrow:Zeit] ) $$
-$\df$ \todomp{Verweis auf eq 5.11} ist eine Diskretisierung 
-(1. Zeitintervall im Euler-Verfahren) der partiellen Differentialgleichung
+    Kontinuierlich: Funktion $u$
+    \[u(x,t) \quad x \in \R^2, \ t \text{ Zeit} \]
 
-\begin{equation}
-\frac {\partial u} {\partial t} = \Delta u \quad 
-\text{Wärmeleitgleichung oder Diffusionsgleichung}
-\end{equation}
+    \eqref{eq:5.11} ist eine Diskretisierung (1 Zeitschritt im Eulerverfahren) der partiellen Differentialgleichungen
+    \begin{equation}\label{eq:5.12}
+        \frac{\partial u}{\partial t} = \Delta u
+    \end{equation}
+    Bekannt als \mim{Wärmegleichung} oder \mim{Diffusionsgleichung}.\\
+    Zum Zeitpunkt $t=0$ möge die Anfangsbedingung
+    \begin{equation}\label{eq:5.13}
+        u(x,0)=u^{(0)}=f(x)
+    \end{equation}
+    gelten. Vorranschreiten der Zeit $t$ repräsentiert Diffusion.\\
+    Für einen stationären Zustand, also keine Änderung $\frac{\partial u}{\partial t}$ dann muss auch $\Delta u =0$ gelten.\\
+    Diese wird unteranderem von konstanten Funktionen oder linearen Funktionen $u(x_1,x_2) = ax_1 + bx_2$ erfüllt.\\
+    \ \\
+    Es existiert auch einen explizite Formel für die Lösung der Diffusionsgleichung \eqref{eq:5.12} mit Anfangsbedingung \eqref{eq:5.13}:
+    \[u(x,t) = \left( G_{\sqrt{2t}} * u^{(0)} \right)(x)\]
+    Wobei $\sqrt{2t}$ für eine Skalierung um diesen Wert steht.\\
+    Zu zeigen ist: $\displaystyle \frac{\partial u}{\partial t} = \Delta u$
+    \[\frac{\partial}{\partial t}  \left( G_{\sqrt{2t}} * u^{(0)} \right) = \Delta  \left( G_{\sqrt{2t}} * u^{(0)} \right)\]
+    \[\overset{\text{mit Satz}}{\Longrightarrow}  \left( \frac{\partial}{\partial t} G_{\sqrt{2t}} \right)* u^{(0)} =  \left( \Delta G_{\sqrt{2t}} \right) * u^{(0)}\]
+    Es bleibt somit z.z.: $\frac{\partial}{\partial t} G_{\sqrt{2t}} = \Delta G_{\sqrt{2t}}$.
 
-Zum Zeitpunkt $t = 0$ möge 
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,1.5) node[left] {$t=0$:};
+            \draw (0,0) -- (3,0) node[below] {\small a} -- (3,1) -- (4,1) -- (4,0) node[below] {\small b} -- (7,0);
+            \draw (0,-2) node[left] {$t>0$:};
+            \draw[shift={(0,-3.5)}] plot [smooth, tension = 0.1] coordinates {(0,0) (2.95,0.05) (3.05,1) (3.95,1) (4.05,0.05) (7,0)};
+        \end{tikzpicture}
+    \end{center}
+    Bemerkenswert ist das, für $t=0$ die Funktion nicht stetig ist, aber für alle $t>0$ die Funktion beliebig oft differenzierbar ist.\\
+    \ \\
+    Insgesamt lässt sich die Idee darstellen als:
 
-\begin{equation}
-	u (x, 0) = u ^{(0)} (x) = f(x) \quad \text{Anfangsbedingung}
-\end{equation}
-gelten.
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) node[left] {\small kontinueirlich:} -- (10,0) node[right] {\small t};
 
-Voranschreiten der Zeit $t$ $\df$ Wärmeleitung / Diffusion 
+            \draw (1,-0.5) rectangle (2,-1.5);
+            \draw (1.5,-1) node {\large $u^{(0)}$};
+            \draw (1.5,-1.5) node[below] {\small $u(\cdot,0)$};
+            \draw[->] (1.5,-2) -- (1.5,-2.5) -- node[above] {\small $G_{\sqrt{2t}}*$} (8.5,-2.5) -- (8.5,-2);
+            \draw (8,-0.5) rectangle (9,-1.5);
+            \draw (8.5,-1.5) node[below] {\small $u(\cdot,t)$};
 
-$\df$ stationärer Zustand ? ( keine Änderung mehr 
-	$ \frac {\partial u} {\partial t} = 0 $  )
-Muss also $\Delta = 0$ erfüllen.
+            \draw (0,-4) node[left] {\small diskret:};
+            \draw (1,-4) rectangle (2,-5);
+            \draw (1.5,-4.5) node[] {\large $u^{(0)}$};
+            \draw[->] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+            \draw[shift={(2,0)}] (1,-4) rectangle (2,-5);
+            \draw[shift={(2,0)}] (1.5,-4.5) node[] {\large $u^{(1)}$};
+            \draw[->,shift={(2,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+            \draw (6,-4.5) node[] {\LARGE ...};
 
-\todoKom{Bildchen}
-
-Kontinuierlicher Fall:
-Es gibt eine explizite Formel für die Lösung der Differentialgleichung 
-\todomp{Ref. auf (5.12)} mit Anfangsbedingung \todomp{Ref. 5.13}:
-$$ u (x,t) = \left( [arrow:Gauss-Kern]G_{\sqrt{2 t}[ar:mitSkal.]} \ast u ^{(0)} \right) (x)$$
-
-\begin{proof}
-	\small
-	\todoKom{vielleicht noch machen? siehe p 51}
-	zu zeigen: $ \frac {\partial u} {\partial t} = \Delta u$	
-\end{proof}
-
-\begin{minipage}{1\linewidth}
- Bildchen zum kontinuierlichem Fall 
-\end{minipage}
-
-\begin{minipage}{1\linewidth}
- Bildchen zum diskreten Fall 
-\end{minipage}
+            \draw[shift={(7,0)}] (1,-4) rectangle (2,-5);
+            \draw[shift={(7,0)}] (1.5,-4.5) node[] {\large $u^{(n)}$};
+            \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+        \end{tikzpicture}
+    \end{center}
 
