@@ -1145,7 +1145,7 @@ Ansatz für $M$:
 
 \todoKom{Bild zu isotrop und anisotrop. (Kann man sich sparen?)}
 
-\newcommand{\vecx}{\mathbf{x}}
+\newcommand{\vecx}[1][x]{\mathbf{#1}}
 Im diskreten Fall:
 $\vecx \in \Z^2$ $\vecx_W = \vecx + 
 	\begin{pmatrix}
@@ -1198,3 +1198,97 @@ Sei $M =
  $ 
 \end{minipage}
 
+\todoKom{Ab hier livetex}
+\todoKom{Wiederholung von letzter Woche.}
+Bei Salt, Pepper einmal vorglätten, aber nur bei der $u$ in der Steuerungsfunktion.
+
+
+\section{Bilaterale Filter}
+
+Anderer Ansatz für selbes Problem:
+	$$ u (\vecx) := \text{gewichtetes Mittel aus allen } f(\vecx[y]) \text{ mit}$$
+
+	\begin{enumerate}[a)]
+	  \item $\vecx[y]$ ist nahe bei $\vecx$ \emph{und}
+		\item $f(\vecx[y])$ ist nahe bei $f(\vecx)$
+	\end{enumerate}
+
+	$$ u(\vecx)  = \frac {1} {w(\vecx)} \int_\Omega g(\norm{|\vecx - \vecx[y]|}) 
+		f(\vecx[y]) d\vecx[y] \todomp{unterpunkte}$$
+
+	Oft: $g,h$ \dots Gauß-Kerne ($\df$ \enquote{nichtlinearer Gauß-Filter})
+
+	Manchmal: $g,h$ \dots charakteristische Funktionen \todomp{bild}.
+	($\df$ \enquote{SUSAN-Filter}) 
+	\todomp {oder Mischunngen}
+
+	Effekt: Falls Höhe (Kante) > Filterradius ($h$) $\df$ Kante bleibt erhalten.
+
+	Numerische sehr aufwändig:
+		\begin{itemize}[-]
+		  \item keine reine Faltung ($\df$ keine FFT-Implementierung möglich) 
+			\item Normierung $w(\vecx)$ in jedem Punkt neu berechnen.
+		\end{itemize}
+
+Manchmal: $f \overset{\log}{\mapsto} \log f \overset{\text{bil Filter}}{\mapsto}
+	\log u \overset{\exp}{\mapsto} u$
+	
+\section{Entrauschen mittels Variationsrechnung}
+
+Erinnerung: $\todomp{Bild}$
+
+\begin{enumerate}[{Wunsch} 1:]
+  \item $u \approx f$ \hfill (Datenkonsistenz)
+	\item $u$ sei \enquote{glatt} (Regularitätsbedingung)
+\end{enumerate}
+
+Mathematische Umsetzung der Wünsche:
+
+\begin{enumerate}[{Wunsch} 1:]
+  \item $\norm{u -f}_2 = \sqrt{\int_\Omega |u(x) - f(x)|^2 dx}$ sei klein. 
+	\item $ \norm{\nabla u}_2 = \sqrt{\int_\Omega |\nabla u(x)|^2 dx} 
+		= \sqrt{\int_\Omega ( \frac {\partial u} {\partial x} (x)^2) + 
+		( \frac {\partial u} {\partial y} (x)^2) dx}$ sei klein
+\end{enumerate}
+
+Kombination:  
+
+\begin{equation}
+\label{5.15}
+\norm{u -f}_2 + \lambda \cdot \norm{\nabla}_2^2 
+	\overset{u\in U}{\longrightarrow} \min
+\end{equation}
+
+	U \dots geeigneter Funktionenraum
+
+	$\lambda > 0$, fest (\enquote{Kopplungskonstante})	
+
+In diesem Bsp. empfiehlt sich als Suchraum
+
+$$ U = \set{ u: \norm{u}_2 < \infty, \nabla u \text{ existiert }, 
+\norm{\nabla u}_2 < \infty} =: W^{1,2}[]
+$$
+
+1 \dots Ableitung 1. Ordnung
+
+2 \dots 2-Norm
+
+Im obigen Ansatz (\ref{5.15}) stellt man fest, dass der Regularitätsterm
+
+	$$ \norm{\nabla u}_2^2 = {\int_\Omega |\nabla u(x)|^2 dx} 
+		= {\int_\Omega ( \frac {\partial u} {\partial x} (x)^2) + 
+		( \frac {\partial u} {\partial y} (x)^2) dx}$$
+
+die große Gradiente an (gewollten Kanten) zu stark bestraft. 
+($\df$ optimales $u$ hat geglättete Kanten)
+
+Ausweg: Wähle $\norm{\nabla u}_2 = \sqrt {s.o.}$ oder 
+$\norm{\nabla u}_1 = \int |\nabla u(x)| dx 
+= \int_\Omega ( |\frac {\partial u} {\partial x} (x)| 
++ |\frac {\partial u} {\partial y} (x)| ) dx$
+
+\begin{equation}
+\label{5.16}
+\norm{u -f}_2 + \lambda \cdot \norm{\nabla}_1 
+	\overset{u\in U}{\longrightarrow} \min
+\end{equation}
