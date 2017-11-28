@@ -1124,16 +1124,22 @@ Ansatz für $M$:
 					\begin{pmatrix}
 						g(| \frac {\partial u} {\partial x}|)	 & 0 \\	
 						0 & g(| \frac {\partial u} {\partial y}|)	\\	
-					\end{pmatrix}	
+					\end{pmatrix}
 				$
 			
 		\end{enumerate}
 		%
 	\end{minipage}
 	%
-	\begin{minipage}{0.5\linewidth}
+	\begin{minipage}{0.6\linewidth}
 	 	\begin{tikzpicture}
-	 	  \draw[help lines] (0,0) grid (5,5);
+			\draw[shift={(-0.75,0.75)}] (0,0) node[left] {$\displaystyle g_\kappa(s) = \frac{1}{1+\left(\frac{s}{\kappa}\right)^2}$};
+			\draw[scale=1.5,domain=0:3,smooth,variable=\x] plot ({\x},{(1/(1+\x*\x)});
+			\draw (0,1.5) node[left] {\small 1};
+			\draw[->] (0,-0.5) -- (0,2);
+			\draw[->] (0,0) -- (5,0) node[right] {\small $s$};
+			\draw[dotted] (1.5,0) node [below] {\small $\kappa$} -- (1.5,0.75);
+			\draw[dotted] (0,0.75) node[left] {\small $\frac{1}{2}$} -- (1.5,0.75);
 	 	\end{tikzpicture} 
 		\begin{itemize}
 		  \item Kante mit $\norm{\nabla u} < \kappa$ 
@@ -1159,10 +1165,27 @@ Sei $M =
 	0 & c_1 (\vecx) \\	
 \end{pmatrix}$
 
+\newcommand{\x}[0]{
+	\boldsymbol{x}
+}
+\newcommand{\y}[0]{
+	\boldsymbol{y}
+}
+
 \begin{minipage}{0.5\linewidth}
- \begin{tikzpicture}
-   \draw[help lines] (0,0) grid (5,5);
- \end{tikzpicture} 
+	\begin{tikzpicture}
+		\draw (0,0) rectangle node[] {$\x$} (0.5,0.5);
+		\draw[->] (0.25,0.5) -- ++(0,1);
+		\draw (0,1.5) rectangle node[] {$\x_N$} (0.5,2);
+		\draw[->] (0.25,0) -- ++(0,-1);
+		\draw (0,-1) rectangle node[] {$\x_S$} (0.5,-1.5);
+		\draw[->] (0.5,0.25) -- ++(1,0);
+		\draw (1.5,0) rectangle node[] {$\x_O$} (2,0.5);
+		\draw[->] (0,0.25) -- ++(-1,0);
+		\draw (-1,0) rectangle node[] {$\x_W$} (-1.5,0.5);
+		\draw[->] (-1,-0.25) -- ++(0.75,0) node[right] {\small $x$};
+		\draw[->] (-1,-0.25) -- ++(0,-0.75) node[below] {\small $y$};
+	\end{tikzpicture}
 \end{minipage}
 %
 \begin{minipage}{0.5\linewidth}
