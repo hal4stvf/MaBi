@@ -1,8 +1,8 @@
 #Latex Makefile
 
 FILE = BiVa 
-EXDIR = "exercise/Anton_Dennis/Blatt_2/"
-EX = "${EXDIR}B2A3.tex"
+EXDIR = "exercise/Anton_Dennis/Blatt_3/"
+EX = "${EXDIR}B3A2.tex"
 
 all:$(FILE) clean
 
