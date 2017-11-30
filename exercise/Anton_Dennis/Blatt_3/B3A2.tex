@@ -9,10 +9,76 @@
 
 \begin{enumerate}[1.]
 	\item $f \in L^1(\R^d)$, dann ist $\hat{f}$ beschränkt und stetig. 
+%% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %  
+	\newcommand{\g}{\underbrace{|e^{i \fop{z,x }}}_{= 1}|}
+	\newcommand{\vorfaktor}{C} % hier noch Vorfaktor eintragen
+%% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %  
+	\begin{proof}
+		Für die Beschränkheit gilt es zu zeigen:
+		$$ \sup_{z\in \R^d} |\hat{f}(z)| < \infty $$
+		Schreibt man dies aus sieht man:
+		$$ \begin{aligned}
+			|\hat{f}(z)| 
+			&= \vorfaktor |\int_{\R^d} f(x) e^{i \fop{z,x }} dx|
+			\\
+			&\leq \vorfaktor \int_{\R^d} |f(x)| \g dx %für g siehe oben
+			\\
+			&= \vorfaktor \int_{\R^d} |f(x)| dx = \vorfaktor \norm{f}_1 < \infty 
+		\end{aligned} $$
+
+		Nun zur Stetigkeit. Es muss gezeigt werden, dass für $(z_n)_{n\in\N}\in \R^d$
+		mit $\limes z_n = z$ gilt
+		
+		$$ \begin{aligned}
+			\limes \hat{f}(z_n) &= \hat{f}(z)
+			\\
+			\limes \vorfaktor \int_{\R^d} f(x) e^{i \fop{z_n,x }} dx 
+		&= \vorfaktor \int_{\R^d} f(x) e^{i \fop{z,x }} dx 
+		\end{aligned}$$	
+		Dies ist gerade die Aussage des \enquote{Satz von Lesbegue} 
+		(wenn auch etwas versteckt):
+
+		{\scriptsize
+			Es seien $\phi_n,\phi: S \to Y$ $\mu$-messbar und $g \in \text{L}(\mu;\R)$.
+			($S$ beliebige Menge, $Y$ Banachraum)
+
+			Gilt 
+			\begin{enumerate}[(1)]
+				\item $\phi_n \to \phi$ $\mu$-fast überall $\quad n \to \infty$
+			  \item $|\phi_n| \leq g$ $\mu$-fast überall $\quad \forall n\in \N$ 
+			\end{enumerate}		
+
+			Dann sind $\phi_n,\phi \in \text{L}(\mu, \R)$ und es konvergiert 
+			$$\limes \int |\phi_n| d\mu = \int |\phi| d\mu$$
+		}
+		
+		\textbf{Vorbereitung:}	
+		
+		Definiere: 
+		$\phi: \R^d \times \R^d \to \R$, $ (x,z) \mapsto \vorfaktor 
+		f(x)e^{-i \fop{z,x }} $
+		
+		Wir wollen dann soetwas haben:	
+
+		$$\limes \int |\phi_n(x)| d\mu(x) = \int |\phi(x)| d\mu(x)$$
+
+		Damit definieren wir: $\phi_n(x) := \phi_{z_n}(x) := \phi(x,z_n)$ 
+		mit $(z_n)_{n\in \N} \in \R^d$
+
+		Dann brauchen wir um den obrigen Satz anwenden zu können:
+		
+		\begin{enumerate}[(1)]
+		  \item $\phi_n,\phi_z $ 
+			\item Stetigkeit von $\phi_z(x)$  
+		\end{enumerate}
+	\end{proof}
+	%%% %%% %%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%
 	\item $c\in \R \setminus \set{0}$, $f\in L^1(\R^d)$. Es sei $g(x) := f(cx)$. 
 		Es gilt: $\hat{g}(z) = \frac {1} {|c|^d} \hat{f} ( \frac {z} {c})$.
+	%%% %%% %%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%
 	\item $f \in L^1(\R^d)$. Es sei $g(x) := \overline{f(x)}$.
 		Es gilt: $\hat{g}(z) = \overline{\hat{f}(-z)}$.
+	%%% %%% %%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%%%% %%%
 	\item Es sei $f\in L^1(\R^d)$ und $g(x) := f(x+a)$ für ein $a\in \R^d$.	
 		Dann gilt $\hat{g}(z) = e^{i\langle a, z \rangle}\hat{f}(z)$.
 \end{enumerate}
@@ -28,30 +94,31 @@ $$\Dt G_{\sqrt{2t}} (x) = \Delta G_{\sqrt{2t}} (x) $$
 	$ \begin{aligned}
 		\Dt G_{\sqrt{2t}} (x) 
 		&=  \Dt \frac {1} {(2\pi\cdot 2t)^{ \frac {d} {2}}}\cdot 
-			exp({ \frac {-|x|^2} {4t}})
+		exp({ \frac {-|x|^2} {4t}})
 		\\
 		&= \left(\Dt \frac {1} {(4 \pi t)^{ \frac {d} {2}}}\right)
-			e^{ -\frac {|x|^2} {4t}} + \frac {1} {(4 \pi t)^{ \frac {d} {2}}}\cdot  
-			\left(\Dt e^{ -\frac {|x|^2} {4t}}\right)
+		e^{ -\frac {|x|^2} {4t}} + \frac {1} {(4 \pi t)^{ \frac {d} {2}}}\cdot  
+		\left(\Dt e^{ -\frac {|x|^2} {4t}}\right)
 		\\
-		&=  \frac {- \frac {d} {2}4\pi } {(4\pi t)^{ \frac {d} {2} - 1}} \cdot e^{ \frac {-|x|^2} {4t}}
-			+ \frac {1} {(4 \pi t)^{ \frac {d} {2}}}\cdot  
-			\left(\Dt \frac {-|x|^2} {4t}\right)e^{ \frac {-|x|^2} {4t}}
+		&=  \frac {- \frac {d} {2}4\pi } {(4\pi t)^{ \frac {d} {2} - 1}} \cdot 
+		e^{ \frac {-|x|^2} {4t}}
+		+ \frac {1} {(4 \pi t)^{ \frac {d} {2}}}\cdot  
+		\left(\Dt \frac {-|x|^2} {4t}\right)e^{ \frac {-|x|^2} {4t}}
 		\\
-		&=  \frac {-2d\pi } {(4\pi t)^{ \frac {d} {2} - 1}} \cdot e^{ \frac {-|x|^2} {4t}}
-			+ \frac {1} {(4 \pi t)^{d/2}}\cdot  
-			\left(\frac {|x|^2} {4t^2}\right)e^{ \frac {-|x|^2} {4t}}
+		&=  \frac {-2d\pi } {(4\pi t)^{ \frac {d} {2} - 1}} \cdot 
+		e^{ \frac {-|x|^2} {4t}} + \frac {1} {(4 \pi t)^{d/2}}\cdot  
+		\left(\frac {|x|^2} {4t^2}\right)e^{ \frac {-|x|^2} {4t}}
 		\\
 		&=  \left(\frac {-2d\pi } {(4\pi t)^{ \frac {d-2} {2}}} 
-			+ \frac {1} {(4 \pi t)^{d/2}}\cdot  
-			\frac {|x|^2} {4t^2} \right ) \cdot e^{ \frac {-|x|^2} {4t}}
+		+ \frac {1} {(4 \pi t)^{d/2}}\cdot  
+		\frac {|x|^2} {4t^2} \right ) \cdot e^{ \frac {-|x|^2} {4t}}
 		\\
-		&=  \left(\frac {-2d \pi } {\sqrt{(4\pi t)^2}} \cdot \frac {1} {(4 \pi t)^{d/2}}
-			+ \frac {1} {(4 \pi t)^{d/2}}\cdot  
-			\frac {|x|^2} {4t^2} \right ) \cdot e^{ \frac {-|x|^2} {4t}}
+		&=  \left(\frac {-2d \pi } {\sqrt{(4\pi t)^2}} \cdot 
+		\frac {1} {(4 \pi t)^{d/2}} + \frac {1} {(4 \pi t)^{d/2}}\cdot  
+		\frac {|x|^2} {4t^2} \right ) \cdot e^{ \frac {-|x|^2} {4t}}
 		\\
 		&=  \left(\frac {-d } {2t} + \frac {|x|^2} {4t^2} \right )
-			\frac {1} {(4 \pi t)^{d/2}}\cdot e^{ \frac {-|x|^2} {4t}}
+		\frac {1} {(4 \pi t)^{d/2}}\cdot e^{ \frac {-|x|^2} {4t}}
 		\\
 	\end{aligned} $
 \end{minipage}
@@ -77,30 +144,39 @@ $$\Dt G_{\sqrt{2t}} (x) = \Delta G_{\sqrt{2t}} (x) $$
 		&= \frac {1} {(4 \pi t)^{d/2}} \sum_{i\in\set{1,..,d}} 
 		\left(
 		(\partial_i \frac {-2x_i} {4t} )e^{ \frac {-|x|^2} {4t}}
-		+ (\frac {-x_i} {4t} )\partial_ie^{ \frac {-|x|^2} {4t}}
+		+ (\frac {-x_i} {2t} )\partial_ie^{ \frac {-|x|^2} {4t}}
 		\right)
 		\\
 		&= \frac {1} {(4 \pi t)^{d/2}} \sum_{i\in\set{1,..,d}} 
 		\left(
 		(\frac {-1} {2t} )e^{ \frac {-|x|^2} {4t}}
-		+ (\frac {-x_i} {4t} )
-		(\frac {-x_i} {4t} )e^{ \frac {-|x|^2} {4t}}
+		+ (\frac {-x_i} {2t} )
+		(\frac {-x_i} {2t} )e^{ \frac {-|x|^2} {4t}}
 		\right)
 		\\
 		&= \frac {1} {(4 \pi t)^{d/2}} e^{ \frac {-|x|^2} {4t}}
 		\sum_{i\in\set{1,..,d}} 
-		\left( \frac {-1} {2t} + \frac {x_i^2} {(4t)^2}
+		\left( \frac {-1} {2t} + \frac {x_i^2} {(2t)^2}
 		\right) 
 		\\
 		& = \frac {1} {(4 \pi t)^{d/2}} e^{ \frac {-|x|^2} {4t}}
 		\left(\left(\sum_{i\in\set{1,..,d}} 
-		\frac {-1} {2t}\right) + \frac {|x|^2} {(4t)^2}
+		\frac {-1} {2t}\right) + \frac {|x|^2} {(2t)^2}
 		\right) 
 		\\
 		& = \frac {1} {(4 \pi t)^{d/2}} e^{ \frac {-|x|^2} {4t}}
 		\left(
-		\frac {-d} {2t} + \frac {|x|^2} {(4t)^2}
+		\frac {-d} {2t} + \frac {|x|^2} {(2t)^2}
 		\right) 
 	\end{aligned}$$
 \end{minipage}
+
+\textbf{Für Interessiert}
+
+Es sei $f \in C_b(\R^d)$. 
+
+	$$ \forall x \in \R^d : \lim_{t\searrow 0} (G_{\sqrt{2t}} \ast f)(x) = f(x) $$
+
+$$\lim_{t\searrow 0} \int_{\R^d} \frac {1} {\sqrt{4t}} e^{ \frac {- |z-x|^2} 
+	{4t}}f(z) dz = f(x)$$
 \end{document}
