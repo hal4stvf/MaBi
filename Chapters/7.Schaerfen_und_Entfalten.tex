@@ -5,7 +5,7 @@
     \item[Gesucht:] Version mit vielen erkennbaren Details 
 \end{enumerate}
 
-\subsection{\mim{Laplace-Schärfen}}
+\section{\mim{Laplace-Schärfen}}
     Idee:
 
     \begin{center}
@@ -31,7 +31,7 @@ Hinweise zur Umsetzung:
     \item Vorglätten: $u - \tau \C \Delta (G*u)$
 \end{enumerate}
 
-\subsection{Kantenverstärkende Diffusion}
+\section{Kantenverstärkende Diffusion}
     Verallgemeinerte Diffusionsgleichung: $\displaystyle \frac{\partial u}{\partial t} = div(M \nabla u)$.
     Idee: $M$ so wählen, so dass der Fluss:
     \begin{enumerate}[label=-]
@@ -44,7 +44,7 @@ Hinweise zur Umsetzung:
     $\Rightarrow M= \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \underbrace{\mat{v_1 & v_2}^T}_{=\mat{v_1^T \\ v_2^T}} = \frac{1}{\abs{\nabla u}^2} \mat{\lambda_1 \frac{\partial u}{\partial x}(\x)^2 + \lambda_2 \frac{\partial u}{\partial y}(\x)^2  & (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x)\\ (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x) & \lambda_2 \frac{\partial u}{\partial x}(\x)^2 + \lambda_1 \frac{\partial u}{\partial y}(\x)^2}$\\
     falls $\nabla u(\x) \neq 0$, sonst $M= \mat{1 & 0 \\ 0 & 1}$.
 
-\subsection{\mim{Entfaltung}}
+\section{\mim{Entfaltung}}
     \begin{center}
         \begin{tikzpicture}
             \draw (0,0) rectangle node[] {$f$} node[above,yshift=27] {original} (2,2);
