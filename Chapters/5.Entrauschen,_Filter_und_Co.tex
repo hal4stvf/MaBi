@@ -1315,3 +1315,41 @@ $\norm{\nabla u}_1 = \int |\nabla u(x)| dx
 \norm{u -f}_2 + \lambda \cdot \norm{\nabla}_1 
 	\overset{u\in U}{\longrightarrow} \min
 \end{equation}
+
+Genannt \mim{Rudin–Osher–Fatemi-Funktional} (ROF)
+
+\textbf{Allgemeiner Ansatz bei Variationsproblemen:}
+
+\[J(u):=\underbrace{D(u,f)}_{\text{Datenkern}} + \lambda \underbrace{R(u)}_{\text{Regularitätsterm}} \overset{u \in U}{\to} \text{min}\]
+
+Notwendiges Kriterium:\\
+Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besutzt, dann gilt für jede Richtung $v \in U$:
+
+\begin{equation}\label{eq:5.17}
+\underset{\epsilon \nearrow 0}{lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
+\end{equation}
+Dies ist die Verallgemeinerte Richtungsableitung (Gateux-Ableitung).\\
+
+Häufig ist $J$ in Integralform gegeben, z.b.:
+
+\[J(u)= \int_\Omega g(x,u(x),\nabla(x)) dx\]
+
+Dann führt Bedingung \eqref{eq:5.17} auf Gleichungen für bestimmte partielle Ableitungen von $g$ und $u$, die sogenannte \mim{Euler-Lagrange-Gleichung} für \eqref{eq:5.17}.\\
+$\Rightarrow$ partielle Differentialgleichung $u$.
+Fazit:
+
+\begin{center}
+	\begin{tikzpicture}
+		\draw (0,0) rectangle node[] {Filter} (2,1);
+		\draw[->] (2.1,0.5) -- node[above, text width=2cm] {\small \begin{center}
+		wiederholte Anwendung
+		\end{center}} (3.9,0.5);
+		\draw (4,0) rectangle node[yshift=-12,above,text width=3cm] {\begin{center}
+		partielle Differentialgleichung
+		\end{center}} (7,1);
+		\draw[->] (8.9,0.5) -- node[above,text width=2cm] {\small \begin{center}
+		Euler-Lagrange
+		\end{center}} (7.1,0.5);
+		\draw (9,0) rectangle node[] {\small Variationsrechnung} (12,1);
+	\end{tikzpicture}
+\end{center}

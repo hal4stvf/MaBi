@@ -1,4 +1,4 @@
-\chapter{7.Schärfen und Entfalten}
+\chapter{7.Schaerfen und Entfalten}
 (Gegenteil von Kapitel 5)
 \begin{enumerate}
     \item[Gegeben:] unscharfes Bild
@@ -55,7 +55,7 @@ Hinweise zur Umsetzung:
     \end{center}
     Das heißt: $u=f * g$, wobei $u, \ g$ gegeben sind und $f$ gesucht ist.\\
     Alternativ kann dies als die Invertierung des Faltungsoperator $f \mapsto g * f$ betrachtet werden.
-    \begin{enumerate}[label = \alph*)]
+    \begin{enumerate}
         \item Diskreter Fall: \begin{align*}
                                 & g*f=u\\
                                 &(g*f)(j)=u(j), \ j \in \Omega\\
@@ -170,8 +170,8 @@ Hinweise zur Umsetzung:
     \[A(f + h) = Af + \underbrace{Ah}_{\approx 0} \approx Af\]
     
     \underline{Problembehebung:}
-    \begin{enumerate}[label = \arabic*. Ansatz:]
-        \item \ \\
+    \begin{enumerate}
+        \item[] 1. Ansatz:
         \begin{minipage}[c]{0.55\textwidth}
             \begin{center}
                 Approximiere die Funktion $\frac{1}{x}$ durch\\
@@ -206,10 +206,10 @@ Hinweise zur Umsetzung:
                 \end{tikzpicture}
             \end{center}
         \end{minipage}
-        \item Variationsrechnung:
-            \begin{enumerate}[label = \arabic*. Wunsch:]
-                \item $g *f \approx u$
-                \item $\norm{f}_2$ klein
+        \item[] 2. Ansatz: Variationsrechnung:
+            \begin{enumerate}
+                \item[] 1. Wunsch: $g *f \approx u$
+                \item[] 2. Wunsch $\norm{f}_2$ klein
             \end{enumerate}
             Minimiere nun:
             \[\Rightarrow J(f) := \norm{g * f - u}_2^2 + \lambda \norm{f}_2^2 \to min\]
@@ -261,11 +261,10 @@ Hinweise zur Umsetzung:
         \[\Rightarrow \mat{A^*A + \abs{\lambda}I}f=A^*u\]
         \[\Rightarrow f= \mat{A^*A + \abs{\lambda}I}^{-1}A^*u\]
         Die Inverse existiert, da $-\abs{\lambda}$ nicht im Spektrum von $A^*A$ sein kann, denn das Spektrum von $A^*A$ ist positiv und reel.
-        \item noch einmal Variationsrechnung, diesmal mit anderen Wünschen
-        \item Variationsrechnung:
-        \begin{enumerate}[label = \arabic*. Wunsch:]
-            \item $g *f \approx u$
-            \item $\norm{\nabla f}$ klein
+        \item[] 3. Ansatz: noch einmal Variationsrechnung, diesmal mit anderen Wünschen
+        \begin{enumerate}
+            \item[] 1. Wunsch: $g *f \approx u$
+            \item[] 2. Wunsch: $\norm{\nabla f}$ klein
         \end{enumerate}
         Nach analoger Rechnung wie oben erhält man: 
         \begin{equation}
