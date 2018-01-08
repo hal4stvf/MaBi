@@ -177,3 +177,177 @@ Rechts ist das Bild, das durch das Beschreibene Histogramm thresholding dargeste
     \end{tikzpicture}
   \end{center}
 \end{enumerate}
+
+\section{Thresholding als Variationsproblem}
+
+\begin{enumerate}
+\item[geg:] Bild $u: \Omega \to F=[0,1]$ und Schwellenwert $t \in (0,1)$
+\item[$\Rightarrow$:]   $\begin{array}{lr}
+                            \Omega_0 = \{x \in \Omega : u(x) \leq t \} \to \text{schwarz}  \\
+                            \Omega_1 = \{x \in \Omega : u(x) > t \} \to \text{weiß}
+                        \end{array} \bigg \}$ soll in ein Variationsproblem umformuliert werden.
+\end{enumerate}
+
+Setze dazu:
+
+\begin{equation}\label{eq.9.1}
+J(v):=-\int_\Omega (u(x) -t) \C v(x) dx \to \ min
+\end{equation}
+
+mit $v \in U:= \bigl \{ v \in \Omega \to \{ 0,1\} \text{ \ (oder $[0,1]$)} \bigr\}$, dies ist jedoch kein Vektorraum.
+
+Die Lösung dieses Problems ist offenbar
+
+\[v = \chi_{\Omega_1}, \ \text{d.h.} \begin{cases}
+0, & x \in \Omega_0 \\
+1, & x \in \Omega_1
+\end{cases} \]
+
+illustiert hier:
+
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[thick] (0,0) rectangle (8,5);
+        \draw[fill, black!30, draw = black] plot[smooth cycle,tension=0.9] coordinates {(7,1) (7.1,2) (6.8,3) (6,4) (5,3.3) (4,2.5) (3.5,1.2) (5.5,0.7) };
+        \draw (0.5,4.5) node[] {\LARGE $\Omega$};
+        \draw[white] (0.3, 4.2) -- node[black,below,sloped,style={align=center},draw,fill=black!5] {\footnotesize $u(x) \leq t$ \\ \footnotesize $u(x) -t \leq 0$ \\ \footnotesize $v(x) = 0$} ++(0:3);
+        \draw (1,0.8) node[] {$\Omega_0$};
+        \draw[] (5.5, 2.8)  node[black,below,sloped,style={align=center},draw,fill=black!5] {\footnotesize $u(x) \leq t$ \\ \footnotesize $u(x) -t \leq 0$ \\ \footnotesize $v(x) = 0$};
+        \draw (4.2,1.4) node[] {$\Omega_1$};
+        \draw[fill, black!30, draw = black] (2.5,2) rectangle ++(0.11,0.08);
+        \draw[fill, black!30, draw = black] (4,3.7) rectangle ++(0.08,0.11);
+        \draw[fill, black!30, draw = black] (7.2,4.1) rectangle ++(0.07,0.13);
+    \end{tikzpicture}
+\end{center}
+
+Diese Herangehensweise ist jedoch kompliziert, um sie zu begründen betrachten wir die Flecken die neben der großen Masse in der obing Illustration zu sehen sind und etwa durch Rauschen entstanden seien könnten. Durch Verallgemeinerung des in \ref{eq.9.1} gegebenen Funktionals können wir die Zerlegung von $\Omega$ in $\Omega_0$ und $\Omega_1$ weniger Anfällig gegenüber Rauschen und sonstigen kleinen Strukturen machen.
+
+Dazu sei
+
+\begin{equation}\label{eq.9.2}
+TV(v) = \int_\Omega \abs{\nabla v(x)} dx
+\end{equation}
+
+die sogennate \mim{Totalvariation} einer Funktion auf $\Omega$.
+
+Illustration in 1D:
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) -- (9,0);
+        \draw (1,1.5) node[] {$\Omega = [a,b]$};
+        \draw plot[smooth,tension=0.9] coordinates {(1,0.25) (1.7,0.7) (2.5,1) (3.5,1.5) (5,1.9) (6.1,2.5) (7.25,2.9) (8,3)} node[right] {\small $v_1$ monoton};
+        \draw[red] plot[smooth,tension=0.9] coordinates {(1,2.85) (2,2.7) (3,2.5) (4.5,1.8)  (6.5, 1.3) (7.25,0.9) (8,0.5)} node[black,right] {\small $v_2$ monoton};
+        \draw[thick] (1,0.1) -- (1,-0.1) node[below] {\small $a$};
+        \draw[thick] (8,0.1) -- (8,-0.1) node[below] {\small $b$};
+        \draw (9,1.7) node[style={align=left},right] {\small $TV(v_1) = v_1(b) -v_1(a)$ \\ \small $TV(v_2) = \abs{v_2(b) - v_2(a)}$};
+        \draw (0,-4) -- (9,-4);
+        \draw plot[smooth,tension=0.8] coordinates {(1,-3.8) (2,-2.3) (3, -2.7) (4,-1.5) (5,-3.8) (6,-2) (7,-2.2) (8,-2)};
+        \draw[thick] (1,-3.9) -- (1,-4.1) node[below] {\small $a$};
+        \draw[thick] (8,-3.9) -- (8,-4.1) node[below] {\small $b$};
+        \draw (9,-2.3) node[style={align=left},right] {\small Hier ist die Totalvariation die Summe \\ \small aller Höhenanstiege, wobei sowohl \\
+        \small ab- und anstiege positiv gezählt werden.};
+    \end{tikzpicture}
+\end{center}
+
+In Abschnitt 11.2 werden wir weiterhin sehen, dass die Totalvariation sich auch auf nicht stetigen Funktionen etwa $\chi_{(0,\infty)}$ berechnen lässt, obwohl für diese der Gradient nicht definiert ist. Für die eben genannte Funktion beträgt die Totalvariationetwa $1$.
+
+Nun in 2D:
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[thick] (0,0) rectangle (5,3);
+        \draw[fill, black!30, draw = black, thick] plot[smooth cycle,tension=1] coordinates {(4,0.5) (4.1,1) (3,1.5) (2.5,1) (2.4,0.5) (3,0.4)};
+        \draw (0.5,2.5) node[] {\large $0$};
+        \draw (3.1,0.9) node[] {\large $1$};
+        \draw (2.45,1.15) node[] {\small $v$};
+    \end{tikzpicture}
+\end{center}
+
+$TV(v)$ ist hier die Länge der Kante die $\Omega_1$ von $\Omega_0$ trennt.\\
+Die Idee ist nun $TV(v)$ als Strafterm zu \ref{eq.9.1} hinzu zu addieren,
+
+
+\begin{equation}\label{eq.9.3}
+\widetilde J(v):= \underbrace{-\int_\Omega (u(x)-t) \C v(x) dx}_{J(x)} + \lambda \C TV(v) \to \ min
+\end{equation}
+wobei $v \in U$ ist.
+Der Effekt dieser Herangehensweise wird nun illustriert.
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[thick] (0,0) rectangle (8,5);
+        \draw[fill, black!30, draw = black] plot[smooth cycle,tension=0.9] coordinates {(7,1) (7.1,2) (6.8,3) (6,4) (5,3.3) (4,2.5) (3.5,1.2) (5.5,0.7) };
+        \draw (0.5,4.5) node[] {\LARGE $\Omega$};
+        \draw (1,0.8) node[] {$\Omega_0$};
+        \draw (4.2,1.4) node[] {$\Omega_1$};
+        \draw[fill, black!30, draw = black] (2.5,2) rectangle ++(0.11,0.08);
+        \draw[fill, black!30, draw = black] (4,3.7) rectangle ++(0.08,0.11);
+        \draw[fill, black!30, draw = black] (7.2,4.1) rectangle ++(0.07,0.13);
+        \draw[fill, black!10, draw = black] (1,2.5) rectangle ++(0.4,0.4);
+        \draw[->] (-0.5,3.5) node[left] {$M$} -- (0.95,2.95);
+        \draw[] (-0.5,2.5) node[left,draw] {\small $u(x) \geq t, \ t(x)=0$ oder $1$?} -- (1.2,2.7);
+        \draw[decorate,decoration={brace,amplitude=2pt}] (1.45,2.9) -- node[right] {\small $R$} (1.45,2.5);
+    \end{tikzpicture}
+\end{center}
+
+$\begin{array}{cccccccc}
+\text{Falls:} & v|_M = 0:&a & +& \lambda \C b \\
+\text{Falls:} & v|_M = 1:&a-dR^2 & + &\lambda \C (b+4R)
+\end{array} \bigg \}$ Also $M \to 0 \iff 4 \lambda - dR < 0 \iff R > \frac{4 \lambda}{d}$ %??
+
+Das heißt das kleine Segment $M$ wird durch \ref{eq.9.3} \quo{erkannt} falls seine Kantenlänge $R>\frac{4 \lambda}{d}$ ist. Somit können die Abmessung der kleinsten zu segmentierenden Strukturen über $\lambda$ gesteuert werden.
+
+\section{Segmentierung nach Mumford und Shah}
+
+\begin{minipage}{.65\textwidth}
+    \begin{enumerate}
+        \item[Wieder:] Variationsrechnung
+        \item[Diesmal:] Ohne Vorkenntnis des thresholds
+        \item[Idee:] Bild zerlegen in \quo{glatte} Teile getrennt durch Sprünge an deren Rändern.
+        \item[] \
+        \item[geg.:] Bild $u$
+        \item[ges.:] Stückweise glattes Bild $v$ mit Randkurve $\Gamma$
+    \end{enumerate}
+    \begin{enumerate}
+        \item[1. Wunsch:] $u \approx v$ auf ganz $\Omega$
+        \item[2. Wunsch:] $\nabla v$ klein auf $\Omega \backslash \Gamma$
+    \end{enumerate}
+\end{minipage}%
+\begin{minipage}{0.3\textwidth}
+\begin{center}
+    \begin{tikzpicture}
+        \draw[thick] (0,0) rectangle (4,5);
+        \draw[fill, black!30, draw = black,thick] plot[smooth cycle,tension=0.9] coordinates {(3.6,0.5) (3.3,2) (3.4,2.8) (3.8,2.3) (3.4,3.5) (2.9,4) (3.2,4.3) (2.7,4.5) (2.3,4.3) (2.5,4)  (2,3.5) (1.6,2.3) (2,2.8) (1.9,2) (2.2,0.5) (2.4,1.9) (2.8,1.9)};
+        \draw (1.65,3.2) node[] {$\Gamma$};
+    \end{tikzpicture}%%(2.7,4)
+\end{center}
+\end{minipage}
+
+\[\Rightarrow J(v,\Gamma) := \underbrace{\norm{u-v}_{2,\Omega}^2}_{1. \text{ Wunsch}}  + \lambda \underbrace{\norm{\nabla v}_{2,\Omega \backslash \Gamma}^2}_{2. \text{ Wunsch}} \to \ min \]
+
+Wie im letzten Abschnitt \ref{eq.9.2} soll nun noch die Segmentierung sehr kleiner Strukturen vermieden werden, indem man zu $J$ einen entsprechenden Strafterm addiert.
+
+\begin{equation*}
+\widetilde J(v,\Gamma) := \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \ min
+\end{equation*}
+
+Dieses wird \mim{Mumford-Shah-Funktional} (1989) genannt.
+
+\begin{enumerate}
+\item[$\lambda$] bestimmt die \quo{Flachheit} von $v$ auf $\Omega \backslash \Gamma$
+\item[$\mu$] ist proportional zur Größe der kleinsten zu segmentierenden Struktur.
+\end{enumerate}
+
+Die numerische Lösung dieses Problemes ist jedoch sehr kompliziert, da neben $v$ auch die Kurve $\Gamma$ variiert wird, desßhalb existert eine \quo{vereinfachte} Version das dieses Problem approximiert.
+
+Mumford-Shah (1989):
+
+\[\widetilde J(v,\Gamma) := \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma)\]
+
+Strekalovskiy \& Cremers (2014):
+
+\[\widetilde J(v,\Gamma) := \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
+
+Die minimierung und $\mu$ simulieren den Sprung an der Randkurve $\Gamma$.
