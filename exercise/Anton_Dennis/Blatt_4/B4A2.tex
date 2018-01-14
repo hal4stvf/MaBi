@@ -1,0 +1,27 @@
+\documentclass[
+ %ngerman,convert={density=300,size=1080x800,outext=.png}]{standalone}
+ ngerman]{report}
+\usepackage{mathmacros}
+\usepackage{exercise}
+
+\begin{document}
+\section*{Blatt 4. Aufgabe 2}
+
+Wir haben folgendes gegeben: 
+
+$$ u(x) := e^{- \frac {1} {2} x^2}$$
+
+Möglichkeit eins:
+
+$ \begin{aligned}
+	\hat{u}(x) = \frac {1} {\sqrt{2\pi}} 
+		\int_{\R} e^{- \frac {1} {2} x^2} e^{- ixz} dx 
+	&= \frac {1} {\sqrt{2\pi}} \int_{\R} e^{- \frac {1} {2} x^2} e^{- ixz} dx
+	\\ 	
+	&= \frac {1} {\sqrt{2\pi}} \left( 
+		e^{- \frac {1} {2} x^2} (\frac {i}{z}) e^{- ixz} \mid_{-\infty}^{\infty}
+		- \int_{\R} (e^{- \frac {1} {2} x^2})' ( \frac {i} {z})e^{- ixz} dx 
+		\right)
+\end{aligned}$
+
+\end{document}

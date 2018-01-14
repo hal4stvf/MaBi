@@ -1,8 +1,5 @@
 \chapter{6.Kantenerkennung}
 
-\newcommand{\mat}[1] {
-\begin{pmatrix} #1 \end{pmatrix}
-}
 
 \section{\mim{Gradientenfilter}}
 Wir suchen Stellen $\x$ mit großem Gradienten:
@@ -173,17 +170,17 @@ In 2D:
 \begin{center}
     \begin{tikzpicture}
     \pgfplotsset{
-        colormap name=viridis,
+        colormap name=\chsixgaussfigsampleColor,
     }
-        \begin{axis}[hide axis,scale=0.75,name=plot1,samples=60]
-            \addplot3[surf,domain=-2:6,domain y=-3.7:3.7,samples=40]
+        \begin{axis}[hide axis,scale=-1.75,name=plot1,samples=60]
+            \addplot3[surf,domain=-2:6,domain y=-3.7:3.7,samples=\chsixgaussfigsampleone]
                 {exp(-( (x-\centerx)^2 + (y-\centery)^2)/3 )};
-            \end{axis}
+         \end{axis}
             \draw[->] (6,1.5)--(7,1.5);
             \draw (1.5,0) node[left] {\Large $G$};
             \draw (7.5,0) node[left] {\Large $\Delta G$};
         \begin{axis}[hide axis,scale=0.75,at={(8cm,1cm)}, anchor=center]
-            \addplot3[surf,domain=-3:3,domain y=-5:5,samples=60]
+            \addplot3[surf,domain=-3:3,domain y=-5:5,samples=\chsixgaussfigsampleTwo]
             {x^2*exp(- x^2/2 - y^2/2) - 2*exp(- x^2/2 - y^2/2) + y^2*exp(- x^2/2 - y^2/2)};
         \end{axis}
     \end{tikzpicture}
